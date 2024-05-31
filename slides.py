@@ -303,11 +303,11 @@ class Intro(Slide):
         A = MyLabeledDot(label_out=Tex(r"A",font_size=35),color=BLUE,radius=0.07,point=4.5*RIGHT+1.5*UP).set_z_index(2)
         B = MyLabeledDot(label_out=Tex(r"B",font_size=35),color=BLUE,radius=0.07,point=1.8*RIGHT+0.6*UP).set_z_index(2)
         line = Line(4.5*RIGHT+1.5*UP,1.8*RIGHT+0.6*UP,color=BLUE_E).set_z_index(1)
+        dr = MyLabeledArrow(label=Tex(r"$d\vec{r}$",font_size=35),start=3*RIGHT+UP,end=3*RIGHT+UP-0.7*line.get_unit_vector(),color=ORANGE,pos=0.2*DOWN).set_z_index(1)
+        r = MyDoubLabArrow(label=Tex(r"$r$",font_size=35),start=ORIGIN,end=3*RIGHT+UP,color=GREY,opacity=1,tip_length=0.1).shift(0.15*UP).set_z_index(1)
         FE = MyLabeledArrow(label=Tex(r"$\vec{F}_E$",font_size=35),start=q.get_center(),end=q.get_center()-1.1*line.get_unit_vector(),color=RED,tip_length=0.1,pos=0.3*UP).shift(0.5*UP)
         FExt = MyLabeledArrow(label=Tex(r"$\vec{F}_{ext}$",font_size=35),start=q.get_center(),end=q.get_center()+1.1*line.get_unit_vector(),tip_length=0.1,color=YELLOW,pos=0.3*UP).shift(0.5*UP)
-        img = VGroup(Q,A,B,line,q,FE,FExt).to_corner(RIGHT).shift(1.5*UP)
-        self.add(img)
-        self.wait(2)
+        img = VGroup(Q,A,B,line,q,FE,FExt,dr,r).to_corner(RIGHT).shift(1.5*UP)
 
         list2 = ItemList(Item(r" Consider a charge $Q$ fixed at the origin.",pw="7 cm"),
                           Item(r"We are bringing a charge $q$ by applying  an external force $\vec{F}_{ext}$ just enough to counter the repulsive electric force $\vec{F}_E$ (i.e, $\vec{F}_{ext}= -\vec{F}_E$ ).",pw="7 cm"),
@@ -316,22 +316,70 @@ class Intro(Slide):
                           Item(r" If the external force is removed on reaching B,  the stored energy (potential energy) at B is used to provide kinetic energy to the charge $q$ in such away that the sum of the kinetic and potential energies is conserved. ",pw="13 cm"),
                           buff=0.4).next_to(Cur_title,DOWN,buff=0.4).to_corner(LEFT)
         
-        for item in list2:
+        anm = [VGroup(list2[0],Q),VGroup(list2[1],q,FE,FExt),VGroup(list2[2],A,B,line),list2[3],list2[4]]
+        
+        for item in anm:
             self.play(Write(item))
             self.next_slide()
 
         self.play(FadeOut(list2))
         self.wait(2)
+        self.play(Write(dr),Write(r))
 
 
         list2 = ItemList(Item(r" Thus, work done by external forces in moving a charge $q$ from A to B is.",pw="7 cm"),
-                          Item(r"$W_{AB}=\int_{A}^{B}\vec{F}_{ext}\cdot d\vec{r}$", r"$=-\int_{A}^{B}\vec{F}_{E}\cdot d\vec{r}$",pw="7 cm"),
+                          Item(r"$W_{AB}=\int_{A}^{B}\vec{F}_{ext}\cdot d\vec{r}$", r"$=-\int_{r_A}^{r_B}\vec{F}_{E}\cdot d\vec{r}$",pw="7 cm"),
                           Item(r"This work done increases its potential energy by an amount equal to potential energy difference between points B and A. ",pw="13 cm"),
-                          Item(r" $\Delta U_{BA}=U_B-U_A=W_{AB}$ ", r"$=-\int_{A}^{B}\vec{F}_{E}\cdot d\vec{r}$",pw="13 cm"),
+                          Item(r" $\Delta U_{BA}=U_B-U_A=W_{AB}$ ", r"$=-\int_{r_A}^{r_B}\vec{F}_{E}\cdot d\vec{r}$",pw="13 cm"),
                           Item(r"We can define electric potential energy difference between two points as the work required to be done by an external force in moving (without accelerating ) charge q from one point to another against the electrostatic field.",pw="13 cm"),
                           buff=0.4).next_to(Cur_title,DOWN,buff=0.4).to_corner(LEFT)
         
         for item in list2:
+            for subitem in item:
+                self.play(Write(subitem))
+                self.next_slide()
+
+        self.play(FadeOut(list2))
+        self.wait(2)
+
+        
+        list3 = ItemList(Item(r" Thus, Potential energy difference (Change in P.E.) is",pw="8 cm"),
+                          Item(r"$\Delta U_{BA}=W_{AB}$", r"$=-\int_{r_A}^{r_B}\vec{F}_{E}\cdot d\vec{r}$",pw="7 cm",dot=False),
+                          Item(r"$F_E = \dfrac{1}{4\pi\epsilon_0}\dfrac{Qq}{r^2}$ ",pw="13 cm"),
+                          Item(r" $\Delta U_{BA}=-\int_{r_A}^{r_B} \dfrac{1}{4\pi\epsilon_0}\dfrac{Qq}{r^2} dr$",pw="13 cm",dot=False),
+                          Item(r" $\Delta U_{BA}=\dfrac{-Qq}{4\pi\epsilon_0}\int_{r_A}^{r_B} r^{-2} dr$",pw="13 cm",dot=False),
+                          Item(r" $\Delta U_{BA}=\dfrac{-Qq}{4\pi\epsilon_0}\left[ \dfrac{r^{(-2+1)}}{-2+1} \right]_{r_A}^{r_B}$",r"$=\dfrac{-Qq}{4\pi\epsilon_0}\left[ \dfrac{-1}{r} \right]_{r_A}^{r_B}$",pw="13 cm",dot=False),
+                          buff=0.4).next_to(Cur_title,DOWN,buff=0.4).to_corner(LEFT)
+        
+        list4 = ItemList(Item(r" $\Delta U_{BA}=U_B-U_A=\dfrac{Qq}{4\pi\epsilon_0}\left[ \dfrac{1}{r_B} -\dfrac{1}{r_A} \right]$",pw="13 cm",dot=False),
+                         Item(r" Here, $U_A \rightarrow $) P.E. at A",pw="6 cm"),
+                         Item(r" And, $U_B \rightarrow $) P.E. at B",pw="6 cm"),
+                          buff=0.4).next_to(img,DOWN,buff=0.2).to_corner(RIGHT)
+        
+        sr =SurroundingRectangle(list4[0])
+        
+        for item in list3:
+            for subitem in item:
+                self.play(Write(subitem))
+                self.next_slide()
+        
+        self.play(Write(sr))
+
+        for item in list4:
+            for subitem in item:
+                self.play(Write(subitem))
+                self.next_slide()
+
+        self.play(FadeOut(list3,list4),run_time=0)
+        self.play(FadeIn(list4[0]),VGroup(list4[0],sr).animate.next_to(Cur_title,DOWN,buff=0.2).to_corner(LEFT))
+
+        list5 = ItemList(Item(r"The work done by an electrostatic field in moving a charge from one point to another depends only on the initial and the final points and is independent of the path taken to go from one point to the other. ", r"This is the fundamental characteristic of a conservative force.",pw="7 cm"),
+                          Item(r" The concept of the potential energy would not be meaningful if the work depended on the path(or if force is not conservative).",pw="13 cm"),
+                          Item(r"The actual value of potential energy is not physically significant; it is only the difference of potential energy that is significant. ",pw="13 cm"),
+                          Item(r"There is a freedom in choosing the point where potential energy is zero. A convenient choice is to have electrostatic potential energy zero at infinity.",pw="13 cm"),
+                          buff=0.4).next_to(sr,DOWN,buff=0.2).to_corner(LEFT)
+        
+        for item in list5:
             for subitem in item:
                 self.play(Write(subitem))
                 self.next_slide()
