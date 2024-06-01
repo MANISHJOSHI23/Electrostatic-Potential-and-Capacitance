@@ -331,7 +331,7 @@ class Intro(Slide):
                           Item(r"$W_{AB}=\int_{A}^{B}\vec{F}_{ext}\cdot d\vec{r}$", r"$=-\int_{r_A}^{r_B}\vec{F}_{E}\cdot d\vec{r}$",pw="7 cm"),
                           Item(r"This work done increases its potential energy by an amount equal to potential energy difference between points B and A. ",pw="13 cm"),
                           Item(r" $\Delta U_{BA}=U_B-U_A=W_{AB}$ ", r"$=-\int_{r_A}^{r_B}\vec{F}_{E}\cdot d\vec{r}$",pw="13 cm"),
-                          Item(r"We can define electric potential energy difference between two points as the work required to be done by an external force in moving (without accelerating ) charge q from one point to another against the electrostatic field.",pw="13 cm"),
+                          Item(r"We can define electric potential energy difference between two points as the work required to be done by an external force in moving (without accelerating ) charge q from one point to another against the electrostatic field.",color=YELLOW_D,pw="13 cm"),
                           buff=0.4).next_to(Cur_title,DOWN,buff=0.4).to_corner(LEFT)
         
         for item in list2:
@@ -352,8 +352,8 @@ class Intro(Slide):
                           buff=0.4).next_to(Cur_title,DOWN,buff=0.4).to_corner(LEFT)
         
         list4 = ItemList(Item(r" $\Delta U_{BA}=U_B-U_A=\dfrac{Qq}{4\pi\epsilon_0}\left[ \dfrac{1}{r_B} -\dfrac{1}{r_A} \right]$",pw="13 cm",dot=False),
-                         Item(r" Here, $U_A \rightarrow $) P.E. at A",pw="6 cm"),
-                         Item(r" And, $U_B \rightarrow $) P.E. at B",pw="6 cm"),
+                         Item(r" Here, $U_A \rightarrow $ P.E. at A",pw="6 cm"),
+                         Item(r" And, $U_B \rightarrow $ P.E. at B",pw="6 cm"),
                           buff=0.4).next_to(img,DOWN,buff=0.2).to_corner(RIGHT)
         
         sr =SurroundingRectangle(list4[0])
@@ -370,16 +370,35 @@ class Intro(Slide):
                 self.play(Write(subitem))
                 self.next_slide()
 
-        self.play(FadeOut(list3,list4),run_time=0)
-        self.play(FadeIn(list4[0]),VGroup(list4[0],sr).animate.next_to(Cur_title,DOWN,buff=0.2).to_corner(LEFT))
+        self.play(FadeOut(list3,list4,img))
+        self.wait(1)
+        self.play(FadeIn(list4[0]),VGroup(list4[0],sr).animate.next_to(Cur_title,DOWN))
 
-        list5 = ItemList(Item(r"The work done by an electrostatic field in moving a charge from one point to another depends only on the initial and the final points and is independent of the path taken to go from one point to the other. ", r"This is the fundamental characteristic of a conservative force.",pw="7 cm"),
-                          Item(r" The concept of the potential energy would not be meaningful if the work depended on the path(or if force is not conservative).",pw="13 cm"),
-                          Item(r"The actual value of potential energy is not physically significant; it is only the difference of potential energy that is significant. ",pw="13 cm"),
-                          Item(r"There is a freedom in choosing the point where potential energy is zero. A convenient choice is to have electrostatic potential energy zero at infinity.",pw="13 cm"),
+        list5 = ItemList(Item(r"The work done by an electrostatic field in moving a charge from one point to another depends only on the initial and the final points and is independent of the path taken to go from one point to the other. ", r"This is the fundamental characteristic of a conservative force.",pw="13 cm",color=GREEN),
+                          Item(r" The concept of the potential energy would not be meaningful if the work depended on the path(or if force is not conservative).",pw="13 cm",color=GOLD),
+                          Item(r"The actual value of potential energy is not physically significant; it is only the difference of potential energy that is significant. \\", r"$\Delta U_{BA}=U_B-U_A=(U_B+\alpha)-(U_A+\alpha)=W_{AB}$",pw="13 cm",color=GREEN),
+                          Item(r"There is a freedom in choosing the point where potential energy is zero. A convenient choice is to have electrostatic potential energy zero at infinity. (i.e., $U_{\infty}=0$)",pw="13 cm",color=GOLD),
                           buff=0.4).next_to(sr,DOWN,buff=0.2).to_corner(LEFT)
         
         for item in list5:
             for subitem in item:
                 self.play(Write(subitem))
                 self.next_slide()
+
+        list6 = ItemList(Item(r"With this choice, if we take the point A at infinity ",pw="13 cm",color=GREEN),
+                          Item(r" $U_B-U_{\infty}=W_{\infty B}=$", r"$\dfrac{Qq}{4\pi\epsilon_0}\left[ \dfrac{1}{r_B} -\dfrac{1}{\infty} \right]$",pw="13 cm",color=GOLD),
+                          Item(r" $U_B=W_{\infty B}=$", r"$\dfrac{Qq}{4\pi\epsilon_0}\left[ \dfrac{1}{r_B} \right]\quad (\because U_{\infty=0})$",pw="13 cm",color=RED_D),
+                          Item(r"Potential Energy ($U$) : ", r"Potential energy of charge $q$ at a point is the work done by the external force (equal and opposite to the electric force) in bringing the charge $q$ from infinity to that point.",pw="13 cm",color=YELLOW),
+                          buff=0.4).next_to(sr,DOWN,buff=0.2).to_corner(LEFT)
+        
+        sr2 = SurroundingRectangle(list6[2])
+        arrow = MyLabeledArrow(label=Tex("Potential Energy",font_size=35),start=sr2.get_right(),end=sr2.get_right()+1.5*RIGHT,tip_length=0.2,rel_pos=1.8,opacity=1)
+        arrow2 = MyLabeledArrow(label=Tex("Potential Energy Difference",font_size=35),start=sr.get_right(),end=sr.get_right()+1.5*RIGHT,tip_length=0.2,rel_pos=1.8,opacity=1)
+
+        self.play(FadeOut(list5))
+        for item in list6:
+            for subitem in item:
+                self.play(Write(subitem))
+                self.next_slide()
+
+        self.play(Write(sr2),Write(arrow),Write(arrow2))
