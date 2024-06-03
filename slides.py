@@ -387,13 +387,13 @@ class Intro(Slide):
 
         list6 = ItemList(Item(r"With this choice, if we take the point A at infinity ",pw="13 cm",color=GREEN),
                           Item(r" $U_B-U_{\infty}=W_{\infty B}=$", r"$\dfrac{Qq}{4\pi\epsilon_0}\left[ \dfrac{1}{r_B} -\dfrac{1}{\infty} \right]$",pw="13 cm",color=GOLD),
-                          Item(r" $U_B=W_{\infty B}=$", r"$\dfrac{Qq}{4\pi\epsilon_0}\left[ \dfrac{1}{r_B} \right]\quad (\because U_{\infty=0})$",pw="13 cm",color=RED_D),
+                          Item(r" $U_B=W_{\infty B}=$", r"$\dfrac{Qq}{4\pi\epsilon_0} \dfrac{1}{r_B} \quad (\because U_{\infty=0})$",pw="13 cm",color=RED_D),
                           Item(r"Potential Energy ($U$) : ", r"Potential energy of charge $q$ at a point is the work done by the external force (equal and opposite to the electric force) in bringing the charge $q$ from infinity to that point.",pw="13 cm",color=YELLOW),
                           buff=0.4).next_to(sr,DOWN,buff=0.2).to_corner(LEFT)
         
         sr2 = SurroundingRectangle(list6[2])
-        arrow = MyLabeledArrow(label=Tex("Potential Energy",font_size=35),start=sr2.get_right(),end=sr2.get_right()+1.5*RIGHT,tip_length=0.2,rel_pos=1.8,opacity=1)
-        arrow2 = MyLabeledArrow(label=Tex("Potential Energy Difference",font_size=35),start=sr.get_right(),end=sr.get_right()+1.5*RIGHT,tip_length=0.2,rel_pos=1.8,opacity=1)
+        arrow = MyLabeledArrow(label=Tex("Potential Energy",font_size=35),start=sr2.get_right(),end=sr2.get_right()+1.5*RIGHT,tip_length=0.2,rel_pos=3,opacity=0)
+        arrow2 = MyLabeledArrow(label=Tex("Potential Energy Difference",font_size=35),start=sr.get_right(),end=sr.get_right()+1.5*RIGHT,tip_length=0.2,rel_pos=2.5,opacity=0)
 
         self.play(FadeOut(list5))
         for item in list6:
@@ -402,3 +402,48 @@ class Intro(Slide):
                 self.next_slide()
 
         self.play(Write(sr2),Write(arrow),Write(arrow2))
+
+
+class Potential(Slide):
+    def construct(self):
+        title = Title('CHAPTER 2 : ELECTROSTATIC POTENTIAL AND CAPACITANCE',font_size=40,color=GREEN,match_underline_width_to_text=True)
+        self.play(Write(title))
+        #self.play(Rotate(title,2*PI))
+        self.next_slide()
+        Outline = Tex('Learning Objectives :',color=BLUE)
+        self.play(Write(Outline))
+        self.next_slide()
+        self.play(Outline.animate.next_to(title,DOWN,buff=0.5).to_corner(LEFT).scale(0.8))
+        self.next_slide()
+        list = BulletedList('INTRODUCTION','ELECTROSTATIC POTENTIAL',r'POTENTIAL DUE TO\\ A POINT CHARGE',r'POTENTIAL DUE TO AN\\ ELECTRIC DIPOLE',r'POTENTIAL DUE TO\\ A SYSTEM OF CHARGES',' EQUIPOTENTIAL SURFACES',
+                            r' RELATION BETWEEN FIELD\\ AND POTENTIAL',r'POTENTIAL ENERGY OF A SYSTEM\\ OF CHARGES').scale(0.7).next_to(Outline,DOWN).to_corner(LEFT).shift(0.1*RIGHT)
+
+    
+        list2 = BulletedList(r'POTENTIAL ENERGY IN\\ AN EXTERNAL FIELD',r'POTENTIAL ENERGY OF A DIPOLE\\ IN AN EXTERNAL FIELD','ELECTROSTATICS OF CONDUCTORS','DIELECTRICS AND POLARISATION',
+                             'CAPACITORS AND CAPACITANCE','COMBINATION OF CAPACITORS',r"ENERGY STORED IN\\ A CAPACITOR").scale(0.7).next_to(Outline,DOWN).to_corner(RIGHT)
+        
+        self.add(list,list2)
+        self.next_slide(loop=True)
+        self.play(FocusOn(list[1]))
+        self.play(Circumscribe(list[1]))
+        self.next_slide()
+        self.play(RemoveTextLetterByLetter(list2))
+        self.play(RemoveTextLetterByLetter(list))
+        self.play(RemoveTextLetterByLetter(Outline))
+        Intro_title = Title('ELECTROSTATIC POTENTIAL  DIFFERENCE $(\Delta V)$ And POTENTIAL $()$', font_size=40,color=BLUE,underline_buff=SMALL_BUFF,match_underline_width_to_text=True)
+        self.play(ReplacementTransform(title,Intro_title))
+        self.wait()
+        self.next_slide()
+
+        list = ItemList(Item(r" The potential energy (or work) we just defined is proportional to the test charge $q$ .",pw="13 cm",color=GREEN),
+                          Item(r"It is, therefore, convenient to divide the work by the amount of charge $q$, so that the resulting quantity is independent of $q$ ",pw="13 cm",color=GREEN),
+                          Item(r"Electrostatic Potential Difference ($\Delta V_{BA}$) : ", r"It is defined as the work done by external force in bringing a unit positive charge from point one point (A) to another (B) ",pw="13 cm",color=GOLD),
+                          Item(r"$\Delta V_{BA}=V_B-V_A=\dfrac{W_{AB}}{q}$",r"$=\dfrac{U_{BA}}{q}$",color=PINK,pw="13 cm",dot=False),
+                          Item(r"Electrostatic Potential  ($ V_{B}$) : ", r"It is defined as the work done by external force in bringing a unit positive charge (without acceleration) from infinity to that point (B). ",pw="13 cm",color=GOLD),
+                          Item(r"$ V_{B}=\dfrac{W_{\infty B}}{q}$",r"$=\dfrac{U_{B}}{q}$",color=PINK,pw="13 cm",dot=False),
+                          buff=0.4).next_to(Intro_title,DOWN,buff=0.25).to_corner(LEFT)
+        
+        for item in list:
+            for subitem in item:
+                self.play(Write(subitem))
+                self.next_slide()
