@@ -430,7 +430,7 @@ class Potential(Slide):
         self.play(RemoveTextLetterByLetter(list2))
         self.play(RemoveTextLetterByLetter(list))
         self.play(RemoveTextLetterByLetter(Outline))
-        Intro_title = Title('ELECTROSTATIC POTENTIAL  DIFFERENCE $(\Delta V)$ And POTENTIAL $()$', font_size=40,color=BLUE,underline_buff=SMALL_BUFF,match_underline_width_to_text=True)
+        Intro_title = Title('ELECTROSTATIC POTENTIAL  DIFFERENCE $(\Delta V)$ \& POTENTIAL $(V)$', font_size=40,color=BLUE,underline_buff=SMALL_BUFF,match_underline_width_to_text=True)
         self.play(ReplacementTransform(title,Intro_title))
         self.wait()
         self.next_slide()
@@ -442,8 +442,39 @@ class Potential(Slide):
                           Item(r"Electrostatic Potential  ($ V_{B}$) : ", r"It is defined as the work done by external force in bringing a unit positive charge (without acceleration) from infinity to that point (B). ",pw="13 cm",color=GOLD),
                           Item(r"$ V_{B}=\dfrac{W_{\infty B}}{q}$",r"$=\dfrac{U_{B}}{q}$",color=PINK,pw="13 cm",dot=False),
                           buff=0.4).next_to(Intro_title,DOWN,buff=0.25).to_corner(LEFT)
+        sr1 = SurroundingRectangle(list[3])
+        sr2 = SurroundingRectangle(list[5])
+        arrow = MyLabeledArrow(label=Tex("Potential Difference",font_size=35),start=sr1.get_right(),end=sr1.get_right()+1.5*RIGHT,tip_length=0.2,rel_pos=3,opacity=0)
+        arrow2 = MyLabeledArrow(label=Tex("Potential",font_size=35),start=sr2.get_right(),end=sr2.get_right()+1.5*RIGHT,tip_length=0.2,rel_pos=2.5,opacity=0)
+
         
         for item in list:
             for subitem in item:
                 self.play(Write(subitem))
                 self.next_slide()
+
+        self.play(Write(VGroup(sr1,sr2,arrow,arrow2)))
+        self.wait(1)
+
+class PointCharge(Slide):
+    def construct(self):
+        title = Title('CHAPTER 2 : ELECTROSTATIC POTENTIAL AND CAPACITANCE',font_size=40,color=GREEN,match_underline_width_to_text=True)
+        Outline = Tex('Learning Objectives :',color=BLUE).next_to(title,DOWN,buff=0.5).to_corner(LEFT).scale(0.8)
+        list = BulletedList('INTRODUCTION','ELECTROSTATIC POTENTIAL',r'POTENTIAL DUE TO\\ A POINT CHARGE',r'POTENTIAL DUE TO AN\\ ELECTRIC DIPOLE',r'POTENTIAL DUE TO\\ A SYSTEM OF CHARGES',' EQUIPOTENTIAL SURFACES',
+                            r' RELATION BETWEEN FIELD\\ AND POTENTIAL',r'POTENTIAL ENERGY OF A SYSTEM\\ OF CHARGES').scale(0.7).next_to(Outline,DOWN).to_corner(LEFT).shift(0.1*RIGHT)
+
+    
+        list2 = BulletedList(r'POTENTIAL ENERGY IN\\ AN EXTERNAL FIELD',r'POTENTIAL ENERGY OF A DIPOLE\\ IN AN EXTERNAL FIELD','ELECTROSTATICS OF CONDUCTORS','DIELECTRICS AND POLARISATION',
+                             'CAPACITORS AND CAPACITANCE','COMBINATION OF CAPACITORS',r"ENERGY STORED IN\\ A CAPACITOR").scale(0.7).next_to(Outline,DOWN).to_corner(RIGHT)
+        
+        self.add(title,Outline,list,list2)
+        self.next_slide(loop=True)
+        self.play(FocusOn(list[2]))
+        self.play(Circumscribe(list[2]))
+        self.next_slide()
+        self.play(RemoveTextLetterByLetter(list2))
+        self.play(RemoveTextLetterByLetter(list))
+        self.play(RemoveTextLetterByLetter(Outline))
+        Intro_title = Title('POTENTIAL DUE TO A POINT CHARGE', font_size=40,color=BLUE,underline_buff=SMALL_BUFF,match_underline_width_to_text=True)
+        self.play(ReplacementTransform(title,Intro_title))
+        self.wait()
