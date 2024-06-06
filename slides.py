@@ -478,3 +478,63 @@ class PointCharge(Slide):
         Intro_title = Title('POTENTIAL DUE TO A POINT CHARGE', font_size=40,color=BLUE,underline_buff=SMALL_BUFF,match_underline_width_to_text=True)
         self.play(ReplacementTransform(title,Intro_title))
         self.wait()
+
+class Ex1(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 1 :", r"(a) Calculate the potential at a point P due to a charge of $4 \times 10^{-7}$ C located 9 cm away.\\", r"(b) Hence obtain the work done in bringing a charge of $2 \times 10^{-9}$ C from infinity to the point P. Does the answer depend on the path along which the charge is brought?",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+        self.wait(2)
+
+class Ex2(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 2 :", r" Figures 2.8 (a) and (b) show the field lines of a positive and negative point charge respectively.",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+        self.next_slide()
+        img = ImageMobject("Ex2.png").scale(0.8).next_to(ex_title,DOWN).to_edge(RIGHT)
+        self.play(FadeIn(img))
+        ex_title2 = ItemList(Item(r"(a) Give the signs of the potential difference $V_P- V_Q$; $V_B - V_A$.",pw="7 cm",color=GREEN,dot=False),
+                          Item(r"(b) Give the sign of the potential energy difference of a small negative charge between the points Q and P; A and B.",pw="7 cm",color=GOLD,dot=False),
+                          Item(r" (c) Give the sign of the work done by the field in moving a small positive charge from Q to P.",pw="7 cm",color=RED_D,dot=False),
+                          Item(r"(d) Give the sign of the work done by the external agency in moving a small negative charge from B to A.",pw="13 cm",color=YELLOW,dot=False),
+                          Item(r"(e) Does the kinetic energy of a small negative charge increase or decrease in going from B to A?",pw="13 cm",color=RED_D,dot=False),
+                          buff=0.4).next_to(ex_title,DOWN).to_edge(LEFT)
+        for item in ex_title2:
+            self.play(Write(item))
+            self.next_slide()
+
+class SystemCharge(Slide):
+    def construct(self):
+        title = Title('CHAPTER 2 : ELECTROSTATIC POTENTIAL AND CAPACITANCE',font_size=40,color=GREEN,match_underline_width_to_text=True)
+        Outline = Tex('Learning Objectives :',color=BLUE).next_to(title,DOWN,buff=0.5).to_corner(LEFT).scale(0.8)
+        list = BulletedList('INTRODUCTION','ELECTROSTATIC POTENTIAL',r'POTENTIAL DUE TO\\ A POINT CHARGE',r'POTENTIAL DUE TO\\ A SYSTEM OF CHARGES',r'POTENTIAL DUE TO AN\\ ELECTRIC DIPOLE',' EQUIPOTENTIAL SURFACES',
+                            r' RELATION BETWEEN FIELD\\ AND POTENTIAL',r'POTENTIAL ENERGY OF A SYSTEM\\ OF CHARGES').scale(0.7).next_to(Outline,DOWN).to_corner(LEFT).shift(0.1*RIGHT)
+
+    
+        list2 = BulletedList(r'POTENTIAL ENERGY IN\\ AN EXTERNAL FIELD',r'POTENTIAL ENERGY OF A DIPOLE\\ IN AN EXTERNAL FIELD','ELECTROSTATICS OF CONDUCTORS','DIELECTRICS AND POLARISATION',
+                             'CAPACITORS AND CAPACITANCE','COMBINATION OF CAPACITORS',r"ENERGY STORED IN\\ A CAPACITOR").scale(0.7).next_to(Outline,DOWN).to_corner(RIGHT)
+        
+        self.add(title,Outline,list,list2)
+        self.next_slide(loop=True)
+        self.play(FocusOn(list[3]))
+        self.play(Circumscribe(list[3]))
+        self.next_slide()
+        self.play(RemoveTextLetterByLetter(list2))
+        self.play(RemoveTextLetterByLetter(list))
+        self.play(RemoveTextLetterByLetter(Outline))
+        Intro_title = Title('POTENTIAL DUE TO A SYSTEM OF CHARGES', font_size=40,color=BLUE,underline_buff=SMALL_BUFF,match_underline_width_to_text=True)
+        self.play(ReplacementTransform(title,Intro_title))
+        self.wait()
+
+
+class Ex3(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 3 :", r"Two charges $3 \times 10^{-8}$ C and $-2 \times 10^{-8}$ C are located 15 cm apart. At what point on the line joining the two charges is the electric potential zero? Take the potential at infinity to be zero.",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+        self.wait(2)
+
