@@ -538,3 +538,136 @@ class Ex3(Slide):
         self.play(Write(ex_title))
         self.wait(2)
 
+class DipolePotential(Slide):
+    def construct(self):
+        title = Title('CHAPTER 2 : ELECTROSTATIC POTENTIAL AND CAPACITANCE',font_size=40,color=GREEN,match_underline_width_to_text=True)
+        Outline = Tex('Learning Objectives :',color=BLUE).next_to(title,DOWN,buff=0.5).to_corner(LEFT).scale(0.8)
+        list = BulletedList('INTRODUCTION','ELECTROSTATIC POTENTIAL',r'POTENTIAL DUE TO\\ A POINT CHARGE',r'POTENTIAL DUE TO\\ A SYSTEM OF CHARGES',r'POTENTIAL DUE TO AN\\ ELECTRIC DIPOLE',' EQUIPOTENTIAL SURFACES',
+                            r' RELATION BETWEEN FIELD\\ AND POTENTIAL',r'POTENTIAL ENERGY OF A SYSTEM\\ OF CHARGES').scale(0.7).next_to(Outline,DOWN).to_corner(LEFT).shift(0.1*RIGHT)
+
+    
+        list2 = BulletedList(r'POTENTIAL ENERGY IN\\ AN EXTERNAL FIELD',r'POTENTIAL ENERGY OF A DIPOLE\\ IN AN EXTERNAL FIELD','ELECTROSTATICS OF CONDUCTORS','DIELECTRICS AND POLARISATION',
+                             'CAPACITORS AND CAPACITANCE','COMBINATION OF CAPACITORS',r"ENERGY STORED IN\\ A CAPACITOR").scale(0.7).next_to(Outline,DOWN).to_corner(RIGHT)
+        
+        self.add(title,Outline,list,list2)
+        self.next_slide(loop=True)
+        self.play(FocusOn(list[4]))
+        self.play(Circumscribe(list[4]))
+        self.next_slide()
+        self.play(RemoveTextLetterByLetter(list2))
+        self.play(RemoveTextLetterByLetter(list))
+        self.play(RemoveTextLetterByLetter(Outline))
+        Intro_title = Title('POTENTIAL DUE TO AN ELECTRIC DIPOLE', font_size=40,color=BLUE,underline_buff=SMALL_BUFF,match_underline_width_to_text=True)
+        self.play(ReplacementTransform(title,Intro_title))
+        self.wait()
+        q1 = MyLabeledDot(label_in=Tex("$-$",font_size=35,color=BLACK),label_out=Tex("$-q$",font_size=30,color=BLUE),color=BLUE).shift(2*LEFT).set_z_index(2)
+        q2 = MyLabeledDot(label_in=Tex("$+$",font_size=35,color=BLACK),label_out=Tex("$+q$",font_size=30,color=GREEN),color=GREEN).shift(2*RIGHT).set_z_index(2)
+        lin = Line(q1[0].get_right(),q2[0].get_left(),color=ORANGE)
+        pt = MyLabeledDot(label_out=Tex("P",font_size=30),point=5*UP+3*RIGHT,radius=0.06,pos=UP).set_z_index(2)
+        o = MyLabeledDot(label_out=Tex("O",font_size=30),radius=0.06,pos=0.2*DOWN+0.02*RIGHT).set_z_index(2)
+        lin = VGroup(MyLabeledLine(label=Tex("$a$",font_size=30),start=q1[0].get_right(),end=o[0].get_left(),color=ORANGE,pos=0.2*DOWN),MyLabeledLine(label=Tex("$a$",font_size=30),start=o[0].get_right(),end=q2[0].get_left(),color=ORANGE,pos=0.2*DOWN))
+        r1 = MyLabeledLine(label=Tex("$r_1$",font_size=30),pos=0.2*RIGHT,start=q2[0].get_center(),end=pt[0].get_center(),color=PINK,rot=False).set_z_index(1)
+        r2 = MyLabeledLine(label=Tex("$r_2$",font_size=30),pos=0.2*LEFT,start=q1[0].get_center(),end=pt[0].get_center(),color=PINK).set_z_index(1)
+        r = MyLabeledLine(label=Tex("$r$",font_size=30),pos=0.2*LEFT,start=o[0].get_center(),end=pt[0].get_center(),color=RED).set_z_index(1)
+        theta = Angle(lin[1],r[0],radius=0.4,color=YELLOW)
+        ang = theta.get_value()
+        c = np.cos(ang)*np.cos(ang)*RIGHT+np.cos(ang)*np.sin(ang)*UP
+        N = MyLabeledDot(label_out=Tex("N",font_size=30),point=2*c,radius=0.06,pos=0.3*UP).set_z_index(2)
+        M = MyLabeledDot(label_out=Tex("M",font_size=30),point=-2*c,radius=0.06,pos=0.3*DL).set_z_index(2)
+        line1 = DashedLine(start=q2[0].get_center(),end=N[0].get_center(),color=GOLD)
+        line2 = DashedLine(start=q1[0].get_center(),end=M[0].get_center(),color=GOLD)
+        line3 = DashedLine(start=o[0].get_center(),end=M[0].get_center(),color=RED)
+        theta_lbl = Tex(r"$\theta$",font_size=30).next_to(theta,RIGHT,buff=0.01).shift(0.15*UP)
+        theta2 = Angle(lin[0],line3,radius=0.4,color=YELLOW,quadrant=(-1,1))
+        theta2_lbl= Tex(r"$\theta$",font_size=30).next_to(theta2,LEFT,buff=0.01).shift(0.15*DOWN)
+        ra1= RightAngle(line2, line3, length=0.18, quadrant=(-1,-1), color=YELLOW_A)
+        ra2= RightAngle(r[0], line1, length=0.18, quadrant=(-1,-1), color=YELLOW_A)
+        ca1 = CurvedArrow(start_point=c,end_point=c+0.5*LEFT+0.5*UP,tip_length=0.1)
+        ca1_lbl = Tex(r"$a\cos\theta$",font_size=30).rotate(ang).move_to(ca1.get_end()).shift(0.25*LEFT)
+        ca2 = CurvedArrow(start_point=-c,end_point=-c+0.5*RIGHT+0.5*DOWN,tip_length=0.1)
+        ca2_lbl = Tex(r"$a\cos\theta$",font_size=30).rotate(ang).move_to(ca2.get_end()).shift(0.25*RIGHT)
+        img = VGroup(q1,q2,lin,o,pt,r,r1,r2,theta,theta_lbl,N,line1,M,line3,line2,theta2,theta2_lbl,ra1,ra2,ca1,ca1_lbl,ca2,ca2_lbl).to_corner(UR)
+
+        steps1 = ItemList(Item(r"Consider a dipole of dipole moment $p=q\times 2a$",pw="10 cm"),
+                          Item(r"We have to find the electric potential at point P located at a distance $r$ from the centre of the dipole (O)",pw="8.5 cm"),
+                          Item(r"$\theta \rightarrow$ Angle between $r$ and dipole axis.",pw="9 cm"),
+                          Item(r"Potential at point P due to $+q$ charge :",pw="9 cm"),
+                          Item(r"$V_{+q}=\dfrac{1}{4\pi\epsilon_0}\dfrac{q}{r_1}$",pw="9 cm",dot=False),
+                          Item(r"Potential at point P due to $-q$ charge :",pw="9 cm"),
+                          Item(r"$V_{-q}=\dfrac{1}{4\pi\epsilon_0}\dfrac{-q}{r_2}$",pw="9 cm",dot=False),
+                          buff=0.5).next_to(title,DOWN).to_edge(LEFT)
+        
+        anm1 = [VGroup(steps1[0],q1,q2,lin,o),VGroup(steps1[1],pt,r,theta,theta_lbl),steps1[2],VGroup(steps1[3],r1),steps1[4],VGroup(steps1[5],r2),steps1[6]]
+        
+        steps2 = ItemList(Item(r"Net potential at (P) due to the dipole:",pw="9 cm"),
+                          Item(r"$V=V_{+q}+V_{-q}$",r"$=\dfrac{1}{4\pi\epsilon_0}\dfrac{q}{r_1}-\dfrac{1}{4\pi\epsilon_0}\dfrac{q}{r_2}$",pw="9 cm",dot=False),
+                          Item(r"$V=\dfrac{q}{4\pi\epsilon_0}\left[\dfrac{1}{r_1}-\dfrac{1}{r_2}\right]......(1)$",color=RED,pw="9 cm",dot=False),
+                          Item(r"By Geometry :",pw="9 cm"),
+                          Item(r"$ON=a\cos\theta$",r"\quad and \quad $OM=a\cos\theta$",pw="9 cm",dot=False),
+                          Item(r"For small/point dipole $(a<<<r)$ :",pw="9 cm"),
+                          Item(r"$r_1=r-a\cos\theta$",r"\quad and \quad $r_2=r+a\cos\theta$",color=RED,pw="9 cm",dot=False),
+                          Item(r"Substituting values of $r_1$ and $r_2$ in eq(1)",pw="9 cm"),
+                          buff=0.4).next_to(title,DOWN).to_edge(LEFT)
+        
+        anm2 = [steps2[0],steps2[1],steps2[2],VGroup(steps2[3],line1,line2,line3,ra1,ra2,theta2,theta2_lbl),VGroup(steps2[4],ca1,ca1_lbl,ca2,ca2_lbl),steps2[5],steps2[6],steps2[7]]
+        
+        steps3 = ItemList(Item(r"$V=\dfrac{q}{4\pi\epsilon_0}\left[\dfrac{1}{(r-a\cos\theta)}-\dfrac{1}{(r+a\cos\theta)}\right]$",pw="9 cm",dot=False),
+                          Item(r"$V=\dfrac{q}{4\pi\epsilon_0}\left[\dfrac{r+a\cos\theta-(r-a\cos\theta)}{r^2-a^2\cos^2\theta}\right]$",pw="9 cm",dot=False),
+                          Item(r"$V=\dfrac{q}{4\pi\epsilon_0}\left[\dfrac{r+a\cos\theta-r+a\cos\theta}{r^2-a^2\cos^2\theta}\right]$",pw="9 cm",dot=False),
+                          Item(r"$V=\dfrac{q}{4\pi\epsilon_0}\left[\dfrac{2a\cos\theta}{r^2-a^2\cos^2\theta}\right]$",pw="9 cm",dot=False),
+                          Item(r"$V=\dfrac{1}{4\pi\epsilon_0}\left[\dfrac{p\cos\theta}{r^2-a^2\cos^2\theta}\right]\quad (\because p=q\times 2a)$",pw="9 cm",dot=False),
+                          buff=0.5).next_to(title,DOWN).to_edge(LEFT)
+        
+        steps4 = ItemList(Item(r"Since, $r>>>a$",pw="9 cm"),
+                          Item(r"$\therefore r^2-a^2\cos^2\theta\approx r^2$",pw="9 cm",dot=False),
+                          Item(r"$V=\dfrac{1}{4\pi\epsilon_0}\left[\dfrac{p\cos\theta}{r^2}\right]$",color=PINK,pw="9 cm",dot=False),
+                          Item(r"Special Cases -",pw="9 cm",color=PURE_GREEN),
+                          Item(r"(i) When P lies on axial line of dipole $(\theta=0^\circ $ Or $180^\circ$",pw="9 cm",dot=False),
+                          Item(r"$V_{ax}=\dfrac{1}{4\pi\epsilon_0}\left[\dfrac{p\cos(0^\circ\ or\ 180^\circ)}{r^2}\right]$",pw="9 cm",dot=False),
+                          Item(r"$V_{ax}=\pm \dfrac{1}{4\pi\epsilon_0}\left[\dfrac{p}{r^2}\right]$",color=PINK,pw="9 cm",dot=False),
+                          buff=0.45).next_to(title,DOWN).to_edge(LEFT)
+        sr = SurroundingRectangle(steps4[2])
+        sr2 = SurroundingRectangle(steps4[6])
+        p = Tex(r"$+$ if $\theta=0^\circ$",font_size=30).next_to(sr2,UR,buff=0).shift(2*RIGHT+0.2*DOWN)
+        n = Tex(r"$-$ if $\theta=180^\circ$",font_size=30).next_to(sr2,DR,buff=0).shift(2*RIGHT+0.5*UP)
+        pa = CurvedArrow(start_point=sr2.get_edge_center(RIGHT),end_point=p.get_left(),tip_length=0.1)
+        na = CurvedArrow(start_point=sr2.get_edge_center(RIGHT),end_point=n.get_left(),tip_length=0.1)
+
+        steps5 = ItemList(Item(r"(ii) When P lies on equitorial line of dipole $(\theta=90^\circ)$",pw="9 cm",dot=False),
+                          Item(r"$V_{eq}=\dfrac{1}{4\pi\epsilon_0}\left[\dfrac{p\cos(90^\circ)}{r^2}\right]$",pw="9 cm",dot=False),
+                          Item(r"$V_{eq}=0$",color=PINK,pw="9 cm",dot=False),
+                          Item(r"Potential due to electric dipole not just depend on $r$ but also on the angle $(\theta)$ between $r$ and dipole axis.",color=GOLD,pw="8 cm"),
+                          Item(r"$V_{dipole}\propto \dfrac{1}{r^2}$", r" But, $V_{\text{point charge}}\propto \dfrac{1}{r}$",color=GOLD,pw="9 cm",dot=False),
+                          buff=0.45).next_to(title,DOWN).to_edge(LEFT)
+        sr3 = SurroundingRectangle(steps5[2])
+        self.next_slide()
+        for item in anm1:
+            self.play(Write(item))
+            self.next_slide()
+        self.play(FadeOut(steps1))
+        self.wait()
+        for item in anm2:
+            self.play(Write(item))
+            self.next_slide()
+        self.next_slide()
+        self.play(FadeOut(steps2))
+        self.wait()
+        for item in steps3:
+            self.play(Write(item))
+            self.next_slide()
+        self.play(FadeOut(steps3))
+        self.wait()
+        for item in steps4:
+            self.play(Write(item))
+            self.next_slide()
+        
+        self.play(Write(sr),Write(sr2),Write(VGroup(p,n,pa,na)))
+        self.next_slide()
+        self.play(FadeOut(steps4,sr2,sr,p,n,pa,na))
+        self.wait()
+        for item in steps5:
+            self.play(Write(item))
+            self.next_slide()
+        self.next_slide()
+
+
