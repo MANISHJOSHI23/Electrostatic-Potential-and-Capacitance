@@ -698,7 +698,7 @@ class Shell(Slide):
                           buff=0.45).next_to(Intro_title,DOWN).to_edge(LEFT)
         
         sr = SurroundingRectangle(steps1[5])
-        anm1 = [VGroup(steps1[0],shell,o,Q,R),VGroup(steps1[1][0],P),VGroup(steps1[1][1],r),steps1[2],VGroup(steps1[3],line,q),steps1[4],VGroup(steps1[5],sr)]
+        anm1 = [VGroup(steps1[0],shell,cgroup,o,Q,R),VGroup(steps1[1][0],P),VGroup(steps1[1][1],r),steps1[2],VGroup(steps1[3],line,q),steps1[4],VGroup(steps1[5],sr)]
 
         for item in anm1:
             self.play(Write(item))
