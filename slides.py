@@ -609,7 +609,7 @@ class DipolePotential(Slide):
                           Item(r"Substituting values of $r_1$ and $r_2$ in eq(1)",pw="9 cm"),
                           buff=0.4).next_to(title,DOWN).to_edge(LEFT)
         
-        anm2 = [steps2[0],steps2[1],steps2[2],VGroup(steps2[3],line1,line2,line3,ra1,ra2,theta2,theta2_lbl),VGroup(steps2[4],ca1,ca1_lbl,ca2,ca2_lbl),steps2[5],steps2[6],steps2[7]]
+        anm2 = [steps2[0],steps2[1],steps2[2],VGroup(steps2[3],line1,line2,line3,M,N,ra1,ra2,theta2,theta2_lbl),VGroup(steps2[4],ca1,ca1_lbl,ca2,ca2_lbl),steps2[5],steps2[6],steps2[7]]
         
         steps3 = ItemList(Item(r"$V=\dfrac{q}{4\pi\epsilon_0}\left[\dfrac{1}{(r-a\cos\theta)}-\dfrac{1}{(r+a\cos\theta)}\right]$",pw="9 cm",dot=False),
                           Item(r"$V=\dfrac{q}{4\pi\epsilon_0}\left[\dfrac{r+a\cos\theta-(r-a\cos\theta)}{r^2-a^2\cos^2\theta}\right]$",pw="9 cm",dot=False),
@@ -622,7 +622,7 @@ class DipolePotential(Slide):
                           Item(r"$\therefore r^2-a^2\cos^2\theta\approx r^2$",pw="9 cm",dot=False),
                           Item(r"$V=\dfrac{1}{4\pi\epsilon_0}\left[\dfrac{p\cos\theta}{r^2}\right]$",color=PINK,pw="9 cm",dot=False),
                           Item(r"Special Cases -",pw="9 cm",color=PURE_GREEN),
-                          Item(r"(i) When P lies on axial line of dipole $(\theta=0^\circ $ Or $180^\circ$",pw="9 cm",dot=False),
+                          Item(r"(i) When P lies on axial line of dipole $(\theta=0^\circ $ Or $180^\circ$)",pw="9 cm",dot=False),
                           Item(r"$V_{ax}=\dfrac{1}{4\pi\epsilon_0}\left[\dfrac{p\cos(0^\circ\ or\ 180^\circ)}{r^2}\right]$",pw="9 cm",dot=False),
                           Item(r"$V_{ax}=\pm \dfrac{1}{4\pi\epsilon_0}\left[\dfrac{p}{r^2}\right]$",color=PINK,pw="9 cm",dot=False),
                           buff=0.45).next_to(title,DOWN).to_edge(LEFT)
@@ -633,13 +633,16 @@ class DipolePotential(Slide):
         pa = CurvedArrow(start_point=sr2.get_edge_center(RIGHT),end_point=p.get_left(),tip_length=0.1)
         na = CurvedArrow(start_point=sr2.get_edge_center(RIGHT),end_point=n.get_left(),tip_length=0.1)
 
+        anm3 =[steps4[0],steps4[1],VGroup(steps4[2],sr),steps4[3],steps4[4],steps4[5],VGroup(steps4[6],sr2),VGroup(pa,p),VGroup(na,n)]
+
         steps5 = ItemList(Item(r"(ii) When P lies on equitorial line of dipole $(\theta=90^\circ)$",pw="9 cm",dot=False),
                           Item(r"$V_{eq}=\dfrac{1}{4\pi\epsilon_0}\left[\dfrac{p\cos(90^\circ)}{r^2}\right]$",pw="9 cm",dot=False),
                           Item(r"$V_{eq}=0$",color=PINK,pw="9 cm",dot=False),
                           Item(r"Potential due to electric dipole not just depend on $r$ but also on the angle $(\theta)$ between $r$ and dipole axis.",color=GOLD,pw="8 cm"),
-                          Item(r"$V_{dipole}\propto \dfrac{1}{r^2}$", r" But, $V_{\text{point charge}}\propto \dfrac{1}{r}$",color=GOLD,pw="9 cm",dot=False),
+                          Item(r"$V_{dipole}\propto \dfrac{1}{r^2}$", r" But, $V_{\text{point charge}}\propto \dfrac{1}{r}$",color=GOLD,pw="9 cm"),
                           buff=0.45).next_to(title,DOWN).to_edge(LEFT)
         sr3 = SurroundingRectangle(steps5[2])
+        anm4=[steps5[0],steps5[1],VGroup(steps5[2],sr3),steps5[3],steps5[4][0],steps5[4][1]]
         self.next_slide()
         for item in anm1:
             self.play(Write(item))
@@ -657,17 +660,47 @@ class DipolePotential(Slide):
             self.next_slide()
         self.play(FadeOut(steps3))
         self.wait()
-        for item in steps4:
+        for item in anm3:
             self.play(Write(item))
             self.next_slide()
-        
-        self.play(Write(sr),Write(sr2),Write(VGroup(p,n,pa,na)))
-        self.next_slide()
         self.play(FadeOut(steps4,sr2,sr,p,n,pa,na))
         self.wait()
-        for item in steps5:
+        for item in anm4:
             self.play(Write(item))
             self.next_slide()
+
+class Shell(Slide):
+    def construct(self):
+        Intro_title = Title('POTENTIAL DUE TO A UNIFORMLY CHARGED SPHERICAL SHELL', font_size=40,color=BLUE,underline_buff=SMALL_BUFF,match_underline_width_to_text=True)
+        self.play(Write(Intro_title))
+        self.wait()
         self.next_slide()
+        shell = Circle(1.75,color=RED,stroke_width=2)
+        Q =Tex(r"$Q$",font_size=30).next_to(shell,DR,buff=0).shift(0.5*UP+0.5*LEFT)
+        R = MyLabeledLine(label=Tex(r"$R$",font_size=30),start=shell.get_center(),end=shell.get_boundary_point(UL),opacity=1)
+        o = MyLabeledDot(label_out=Tex(r"O",font_size=30),point=shell.get_center(),radius=0.06,color=RED,pos=0.2*DOWN)
+        P = MyLabeledDot(label_out=Tex(r"P",font_size=30),point=3*UP+1.5*RIGHT,radius=0.04,color=GOLD,pos=0.2*LEFT)
+        r = MyLabeledLine(label=Tex(r"$r$",font_size=30),start=shell.get_center(),end=P[0].get_center(),opacity=1,color=PURPLE,rel_pos=0.75)
+        line = MyDashLabeledLine(label=Tex(r"$\infty$",font_size=30),start=P[0].get_center(),end=P[0].get_center()+2*r[0].get_unit_vector(),color=PURPLE,rel_pos=1.02,opacity=1)
+        q = MyLabeledDot(label_out=Tex(r"q",font_size=30),point=line.get_center(),radius=0.04,color=YELLOW,pos=0.2*DOWN)
+        cgroup = VGroup()
+        for pt in shell.get_all_points():
+            cgroup.add(Tex("$\mathbf{+}$",font_size=25,color=YELLOW).move_to(pt))
+        
+        img = VGroup(shell,cgroup,Q,r,R,o,P,line,q).next_to(Intro_title,DOWN).to_edge(RIGHT)
 
+        steps1 = ItemList(Item(r"Consider a uniformly charged spherical shell of Radius (R) and having charge (Q).",pw="10 cm"),
+                          Item(r"We have to find the electric potential $(V_P)$ at a point P", r" which is $r$ distance from the centre of the shell.",pw="10 cm"),
+                          Item(r"Case (1) : For point(P) outside the shell $(r>R)$ ",pw="9 cm",color=GREEN),
+                          Item(r"$\displaystyle V_P=\dfrac{W_{\infty P}}{q}$",r"$\displaystyle =-\int_{\infty}^{r} \dfrac{F_E}{q}\ dr$",pw="9 cm",dot=False),
+                          Item(r"$\displaystyle V_{P}=-\int_{\infty}^{P} E\ dr$", r"$\displaystyle =-\int_{\infty}^{r}\dfrac{1}{4\pi\epsilon_0}\dfrac{Q}{r^2} dr$",pw="9 cm",dot=False),
+                          Item(r"$ \displaystyle V_P=\dfrac{1}{4\pi\epsilon_0}\dfrac{Q}{r} \quad (r>R)$",pw="9 cm",dot=False,color=PINK),
+                          buff=0.45).next_to(Intro_title,DOWN).to_edge(LEFT)
+        
+        sr = SurroundingRectangle(steps1[5])
+        anm1 = [VGroup(steps1[0],shell,o,Q,R),VGroup(steps1[1][0],P),VGroup(steps1[1][1],r),steps1[2],VGroup(steps1[3],line,q),steps1[4],VGroup(steps1[5],sr)]
 
+        for item in anm1:
+            self.play(Write(item))
+            self.next_slide()
+        self.wait()
