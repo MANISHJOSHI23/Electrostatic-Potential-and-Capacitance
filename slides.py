@@ -776,3 +776,52 @@ class Shell(Slide):
         self.next_slide()
         self.play(Create(lines),Create(label))
         self.wait(2)
+
+class Equipotential(Slide):
+    def construct(self):
+        title = Title('CHAPTER 2 : ELECTROSTATIC POTENTIAL AND CAPACITANCE',font_size=40,color=GREEN,match_underline_width_to_text=True)
+        Outline = Tex('Learning Objectives :',color=BLUE).next_to(title,DOWN,buff=0.5).to_corner(LEFT).scale(0.8)
+        list = BulletedList('INTRODUCTION','ELECTROSTATIC POTENTIAL',r'POTENTIAL DUE TO\\ A POINT CHARGE',r'POTENTIAL DUE TO\\ A SYSTEM OF CHARGES',r'POTENTIAL DUE TO AN\\ ELECTRIC DIPOLE',' EQUIPOTENTIAL SURFACES',
+                            r' RELATION BETWEEN FIELD\\ AND POTENTIAL',r'POTENTIAL ENERGY OF A SYSTEM\\ OF CHARGES').scale(0.7).next_to(Outline,DOWN).to_corner(LEFT).shift(0.1*RIGHT)
+
+    
+        list2 = BulletedList(r'POTENTIAL ENERGY IN\\ AN EXTERNAL FIELD',r'POTENTIAL ENERGY OF A DIPOLE\\ IN AN EXTERNAL FIELD','ELECTROSTATICS OF CONDUCTORS','DIELECTRICS AND POLARISATION',
+                             'CAPACITORS AND CAPACITANCE','COMBINATION OF CAPACITORS',r"ENERGY STORED IN\\ A CAPACITOR").scale(0.7).next_to(Outline,DOWN).to_corner(RIGHT)
+        
+        self.add(title,Outline,list,list2)
+        self.next_slide(loop=True)
+        self.play(FocusOn(list[5]))
+        self.play(Circumscribe(list[5]))
+        self.next_slide()
+        self.play(RemoveTextLetterByLetter(list2))
+        self.play(RemoveTextLetterByLetter(list))
+        self.play(RemoveTextLetterByLetter(Outline))
+        Intro_title = Title('EQUIPOTENTIAL SURFACES', font_size=40,color=BLUE,underline_buff=SMALL_BUFF,match_underline_width_to_text=True)
+        self.play(ReplacementTransform(title,Intro_title))
+        self.next_slide()
+        steps1 = ItemList(Item(r"A surface, which has same electrostatic potential at every point is called equipotential surface.",pw="8 cm"),
+                          Item(r"For a single point charge $(Q)$",pw="6 cm",color=GREEN),
+                          Item(r"$V=\dfrac{1}{4\pi\epsilon_0}\dfrac{Q}{r}$",pw="6 cm"),
+                          Item(r"if $r$ is same (constant) the $V$ is also same (constant)",pw="6 cm",color=PINK),
+                          Item(r"Thus equipotential surfaces of a single point charge are ", r"concentric spherical surfaces ", r" centred at the charge.",pw="6 cm"),
+                          buff=0.45).next_to(Intro_title,DOWN).to_edge(LEFT)
+        
+        img1 = ImageMobject("equip1.png").scale(1.2).next_to(steps1[3],RIGHT).align_to(steps1[0],UP)
+        img2 = ImageMobject("equip2.png").scale(1.2).next_to(Intro_title,DOWN)
+        img2_lbl = Tex(r"Equipotential surfaces for a dipole",font_size=35).next_to(img2,DOWN)
+        img3 = ImageMobject("equip3.png").scale(1.3).next_to(Intro_title,DOWN)
+        img3_lbl = Tex(r"Equipotential surfaces for two identical positive charges.",font_size=35).next_to(img3,DOWN)
+        img4 = ImageMobject("equip4.png").scale(1).next_to(Intro_title,DOWN)
+        img4_lbl = Tex(r"Equipotential surfaces for a uniform electric field.",font_size=35).next_to(img4,DOWN)
+        steps1[4][1].set_color(YELLOW)
+        anm1 = [Write(steps1[0]),Write(steps1[1]),Write(steps1[2]),Write(steps1[3]),FadeIn(img1),Write(steps1[4])]
+        
+        for item in anm1:
+            self.play(item)
+            self.next_slide()
+
+        self.play(Succession(FadeOut(steps1,img1),FadeIn(img2),Write(img2_lbl)))
+        self.next_slide()
+        self.play(Succession(FadeOut(img2_lbl,img2),FadeIn(img3),Write(img3_lbl)))
+        self.next_slide()
+        self.play(Succession(FadeOut(img3_lbl,img3),FadeIn(img4),Write(img4_lbl)))
