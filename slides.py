@@ -804,9 +804,9 @@ class Equipotential(Slide):
                           Item(r"$V=\dfrac{1}{4\pi\epsilon_0}\dfrac{Q}{r}$",pw="6 cm"),
                           Item(r"if $r$ is same (constant) the $V$ is also same (constant)",pw="6 cm",color=PINK),
                           Item(r"Thus equipotential surfaces of a single point charge are ", r"concentric spherical surfaces ", r" centred at the charge.",pw="6 cm"),
-                          buff=0.45).next_to(Intro_title,DOWN).to_edge(LEFT)
+                          buff=0.45).next_to(Intro_title,DOWN).to_edge(LEFT).set_z_index(2)
         
-        img1 = ImageMobject("equip1.png").scale(1.2).next_to(steps1[3],RIGHT).align_to(steps1[0],UP)
+        img1 = ImageMobject("equip1.png").scale(1.2).next_to(steps1[3],RIGHT).align_to(steps1[0],UP).set_z_index(1)
         img2 = ImageMobject("equip2.png").scale(1.2).next_to(Intro_title,DOWN)
         img2_lbl = Tex(r"Equipotential surfaces for a dipole",font_size=35).next_to(img2,DOWN)
         img3 = ImageMobject("equip3.png").scale(1.3).next_to(Intro_title,DOWN)
