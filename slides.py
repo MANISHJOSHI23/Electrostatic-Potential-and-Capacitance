@@ -683,24 +683,96 @@ class Shell(Slide):
         r = MyLabeledLine(label=Tex(r"$r$",font_size=30),start=shell.get_center(),end=P[0].get_center(),opacity=1,color=PURPLE,rel_pos=0.75)
         line = MyDashLabeledLine(label=Tex(r"$\infty$",font_size=30),start=P[0].get_center(),end=P[0].get_center()+2*r[0].get_unit_vector(),color=PURPLE,rel_pos=1.02,opacity=1)
         q = MyLabeledDot(label_out=Tex(r"q",font_size=30),point=line.get_center(),radius=0.04,color=YELLOW,pos=0.2*DOWN)
+        Ein = Tex(r"$E_{in}=0$",font_size=25).next_to(shell.get_center(),DOWN,buff=0.8)
+        Eout = Tex(r"$E_{out}=\dfrac{1}{4\pi\epsilon_0}\dfrac{Q}{r^2}$",font_size=25).next_to(shell.get_top(),UP,buff=0.8)
+        P2 = MyLabeledDot(label_out=Tex(r"P",font_size=30),point=1*UP+0.5*RIGHT,radius=0.04,color=GOLD,pos=0.2*LEFT)
+        r2 = MyLabeledLine(label=Tex(r"$r$",font_size=30),start=shell.get_center(),end=P2[0].get_center(),opacity=1,color=PURPLE,rel_pos=0.5)
+        line2 = MyDashLabeledLine(label=Tex(r"$\infty$",font_size=30),start=P2[0].get_center(),end=P2[0].get_center()+4*r2[0].get_unit_vector(),color=PURPLE,rel_pos=1.02,opacity=1)
+        q2 = MyLabeledDot(label_out=Tex(r"q",font_size=30),point=line2.get_center(),radius=0.04,color=YELLOW,pos=0.2*DOWN)
         cgroup = VGroup()
         for pt in shell.get_all_points():
             cgroup.add(Tex("$\mathbf{+}$",font_size=25,color=YELLOW).move_to(pt))
         
-        img = VGroup(shell,cgroup,Q,r,R,o,P,line,q).next_to(Intro_title,DOWN).to_edge(RIGHT)
+        img = VGroup(shell,Ein,Eout,cgroup,Q,r,R,o,P,line,q,P2,r2,line2,q2).next_to(Intro_title,DOWN).to_edge(RIGHT)
 
         steps1 = ItemList(Item(r"Consider a uniformly charged spherical shell of Radius (R) and having charge (Q).",pw="10 cm"),
-                          Item(r"We have to find the electric potential $(V_P)$ at a point P", r" which is $r$ distance from the centre of the shell.",pw="10 cm"),
+                          Item(r"We have to find the electric potential at a point P", r" which is $r$ distance from the centre of the shell.",pw="10 cm"),
                           Item(r"Case (1) : For point(P) outside the shell $(r>R)$ ",pw="9 cm",color=GREEN),
-                          Item(r"$\displaystyle V_P=\dfrac{W_{\infty P}}{q}$",r"$\displaystyle =-\int_{\infty}^{r} \dfrac{F_E}{q}\ dr$",pw="9 cm",dot=False),
-                          Item(r"$\displaystyle V_{P}=-\int_{\infty}^{P} E\ dr$", r"$\displaystyle =-\int_{\infty}^{r}\dfrac{1}{4\pi\epsilon_0}\dfrac{Q}{r^2} dr$",pw="9 cm",dot=False),
-                          Item(r"$ \displaystyle V_P=\dfrac{1}{4\pi\epsilon_0}\dfrac{Q}{r} \quad (r>R)$",pw="9 cm",dot=False,color=PINK),
+                          Item(r"$\displaystyle V_{out}=\dfrac{W_{\infty P}}{q}$",r"$\displaystyle =-\int_{\infty}^{r} \dfrac{F_E}{q}\ dr$",pw="9 cm",dot=False),
+                          Item(r"$\displaystyle V_{out}=-\int_{\infty}^{P} E\ dr$", r"$\displaystyle =-\int_{\infty}^{r}\dfrac{1}{4\pi\epsilon_0}\dfrac{Q}{r^2} dr$",pw="9 cm",dot=False),
+                          Item(r"$ \displaystyle V_{out}=\dfrac{1}{4\pi\epsilon_0}\dfrac{Q}{r} \quad (r>R)\quad$",r"(Same as point charge.)",pw="9 cm",dot=False,color=PINK),
                           buff=0.45).next_to(Intro_title,DOWN).to_edge(LEFT)
         
-        sr = SurroundingRectangle(steps1[5])
-        anm1 = [VGroup(steps1[0],shell,cgroup,o,Q,R),VGroup(steps1[1][0],P),VGroup(steps1[1][1],r),steps1[2],VGroup(steps1[3],line,q),steps1[4],VGroup(steps1[5],sr)]
+        sr = SurroundingRectangle(steps1[5][0])
+        anm1 = [VGroup(steps1[0],shell,cgroup,o,Q,R,Ein,Eout),VGroup(steps1[1][0],P),VGroup(steps1[1][1],r),steps1[2],VGroup(steps1[3],line,q),steps1[4],VGroup(steps1[5][0],sr),steps1[5][1]]
+
+        steps2 = ItemList(Item(r"Case (2) : For point(P) at the surface of the shell $(r=R)$ ",pw="9 cm",color=GREEN),
+                          Item(r"$ \displaystyle V_{\text{surf}}=\dfrac{1}{4\pi\epsilon_0}\dfrac{Q}{R} \quad (r=R)$",pw="9 cm",dot=False,color=PINK),
+                          buff=0.45).next_to(Intro_title,DOWN).to_edge(LEFT)
+        
+        steps3 = ItemList(Item(r"Case (3) : For point(P) inside the shell $(r<R)$ ",pw="9 cm",color=GREEN),
+                          Item(r"$\displaystyle V_{in}=\dfrac{W_{\infty P}}{q}$",r"$\displaystyle =-\int_{\infty}^{r} \dfrac{F_E}{q}\ dr$",pw="9 cm",dot=False),
+                          Item(r"$\displaystyle V_{in}=-\int_{\infty}^{P} E\ dr$", r"$\displaystyle =-\int_{\infty}^{R} E_{out}\ dr-\int_{R}^{r} E_{in}\ dr$",pw="9 cm",dot=False),
+                          Item(r"$\displaystyle V_{in}=-\int_{\infty}^{R} \dfrac{1}{4\pi\epsilon_0}\dfrac{Q}{r^2}\ dr-\int_{R}^{r} 0 \ dr \quad (\because E_{in}=0)$",pw="9 cm",dot=False),
+                          Item(r"$ \displaystyle V_{in}=\dfrac{1}{4\pi\epsilon_0}\dfrac{Q}{R} $", r"$=V_{\text{surf}}$ (Constant)",pw="9 cm",dot=False,color=PINK),
+                          Item(r"Hence, potential remains constant inside the spherical shell, and is equal to the value at the surface. ",pw="8.3 cm",color=YELLOW_B),
+                          buff=0.44).next_to(Intro_title,DOWN).to_edge(LEFT)
+        
+        sr2 = SurroundingRectangle(steps2[1])
+        sr3 = SurroundingRectangle(steps3[4])
+        anm2 = [steps2[0],VGroup(steps2[1],sr2)]
+
+        axes_2 = (Axes(
+        x_range=[0, 10, 2],
+        y_range=[0, 50, 5],
+        y_length=5,
+        x_length=8,
+        axis_config={'tip_shape': StealthTip,"tip_width":0.08,"tip_height":0.15},
+        y_axis_config={"include_ticks": False}
+      ).set_color(GREEN_C))
+        axes_labels = axes_2.get_axis_labels(x_label=Tex(r"$r$",font_size=30), y_label=Tex(r"$V(r)$",font_size=30))
+
+        func1 = axes_2.plot(lambda x: 35, x_range=[0, 2], color=BLUE)
+        func2 = axes_2.plot(lambda x: 70/x, x_range=[2, 9.5], color=BLUE)
+        lines = VGroup(axes_2.get_lines_to_point(axes_2.c2p(2,70/2),color=RED),
+                       axes_2.get_lines_to_point(axes_2.c2p(4,70/4),color=RED),
+                       axes_2.get_lines_to_point(axes_2.c2p(6,70/6),color=RED),
+                       axes_2.get_lines_to_point(axes_2.c2p(8,70/8),color=RED),
+                       Dot(axes_2.c2p(2,70/2), color=PINK),
+                       Dot(axes_2.c2p(4,70/4), color=GOLD),
+                       Dot(axes_2.c2p(6,70/6), color=ORANGE),
+                       Dot(axes_2.c2p(8,70/8), color=WHITE),)
+        axes_2.get_x_axis().add_labels({0:"O",2:"R",4:"2R",6:"3R",8:"4R"},font_size=25)
+        axes_2.get_y_axis().add_labels({70/2:"V",70/4:"V/2",70/6:"V/3",70/8:"V/4"},font_size=25)
+        c1 = CurvedArrow(start_point=func1.get_center(),end_point=func1.get_center()+0.8*UP+0.4*RIGHT,tip_length=0.1)
+        V1 = Tex(r"$V=\dfrac{1}{4\pi\epsilon_0}\dfrac{Q}{R}\ (r<R)$",font_size=25).next_to(c1.get_end(),UP,buff=0.05)
+        c2 = CurvedArrow(start_point=axes_2.c2p(5,70/5),end_point=axes_2.c2p(5,70/5)+0.8*UP+0.4*RIGHT,tip_length=0.1)
+        V2 = Tex(r"$V=\dfrac{1}{4\pi\epsilon_0}\dfrac{Q}{r}\ (r>R)$",font_size=25).next_to(c2.get_end(),UP,buff=0.05)
+        label = Tex("Graph of potential $(V)$ versus $r$ for spherical shell. ",font_size=30,color=GOLD).next_to(axes_2,DOWN)
 
         for item in anm1:
             self.play(Write(item))
             self.next_slide()
+        
+        self.play(FadeOut(steps1,sr))
+        for item in anm2:
+            self.play(Write(item))
+            self.next_slide()
         self.wait()
+
+        self.play(FadeOut(steps2,sr2,P,r,line,q),FadeIn(P2,r2,line2,q2))
+        for item in steps3:
+            for subitem in item:
+                self.play(Write(subitem))
+                self.next_slide()
+        self.play(Write(sr3))
+        self.next_slide()
+        self.play(FadeOut(steps3,sr3,img))
+        self.play(Create(axes_2),Create(axes_labels))
+        self.next_slide()
+        self.play(Create(VGroup(func1,c1,V1)))
+        self.next_slide()
+        self.play(Create(VGroup(func2,c2,V2)))
+        self.next_slide()
+        self.play(Create(lines),Create(label))
+        self.wait(2)
