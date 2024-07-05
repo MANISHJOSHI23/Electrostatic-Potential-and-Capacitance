@@ -815,6 +815,29 @@ class Equipotential(Slide):
         img4_lbl = Tex(r"Equipotential surfaces for a uniform electric field.",font_size=35).next_to(img4,DOWN)
         steps1[4][1].set_color(YELLOW)
         anm1 = [Write(steps1[0]),Write(steps1[1]),Write(steps1[2]),Write(steps1[3]),FadeIn(img1),Write(steps1[4])]
+
+        prop_title = Tex(r"Properties of equipotential surfaces",font_size=40,color=PURE_GREEN).next_to(Intro_title,DOWN).to_edge(LEFT)
+        steps2 = ItemList(Item(r"The work done in moving any charge(q) over an equipotential surface is always zero.",pw="13 cm"),
+                          Item(r"We know that $ \Delta V_{AB}=(V_A-V_B)=\dfrac{W_{BA}}{q}$",pw="7 cm",dot=False),
+                          Item(r"$\because V_A = V_B$ (Points on equipotential surface)",pw="7 cm",color=GREEN,dot=False),
+                          Item(r"$\therefore W_{BA} = q(V_A-V_B)=0$",pw="7 cm",color=YELLOW,dot=False),
+                          buff=0.5).next_to(prop_title,DOWN,buff=0.6).to_edge(LEFT).set_z_index(2)
+        img5 = ImageMobject("equip5.png").scale(0.8).next_to(steps2[1],RIGHT).align_to(steps2[1],UP)
+
+        steps3 = ItemList(Item(r"The electric field at every point is normal to the equipotential surface passing through that point.",pw="13 cm"),
+                          Item(r"We know that $dW = Fdr\cos\theta$",r"$=qEdr\cos\theta$",pw="7 cm",dot=False),
+                          Item(r"$\because dW = 0$ (Work done over equipotential surface = 0)",pw="9 cm",color=GREEN,dot=False),
+                          Item(r"$\therefore dW = qEdr\cos\theta = 0$",pw="7 cm",dot=False),
+                          Item(r"Neither $q$ nor $E$ is zero; $dr$ is also not zero.",pw="7 cm",dot=False),
+                          Item(r"So, $\cos\theta=0\quad$ ", r"Or\quad $\theta=90^\circ$",pw="7 cm",color=YELLOW,dot=False),
+                          buff=0.5).next_to(prop_title,DOWN,buff=0.6).to_edge(LEFT).set_z_index(2)
+        img6 = ImageMobject("equip6.png").scale(0.9).next_to(steps3[4],RIGHT).align_to(steps3[2],UP)
+
+        steps4 = ItemList(Item(r"In a region, where electric field $(\vec{E})$ is strong equipotential surfaces are close together, and where $(\vec{E})$ is weaker, the equipotential surfaces are farther apart.",pw="7 cm"),
+                          Item(r"Two equipotential surfaces never intersect each other.",pw="7 cm"),
+                          Item(r"As electric field is perpendicular to the equipotential surface their intersection means that there are two directions of electric field at the intersection point which is not possible.",pw="7 cm",color=GREEN,dot=False),
+                          buff=0.5).next_to(prop_title,DOWN,buff=0.6).to_edge(LEFT).set_z_index(2)
+        img7 = ImageMobject("equip7.png").scale(1.1).next_to(steps4,RIGHT)
         
         for item in anm1:
             self.play(item)
@@ -824,4 +847,46 @@ class Equipotential(Slide):
         self.next_slide()
         self.play(Succession(FadeOut(img2_lbl,img2),FadeIn(img3),Write(img3_lbl)))
         self.next_slide()
-        self.play(Succession(FadeOut(img3_lbl,img3),FadeIn(img4),Write(img4_lbl)))
+        self.play(Succession(FadeOut(img3_lbl,img3),FadeIn(img4),Write(img4_lbl))) 
+        self.next_slide()
+        self.play(Succession(FadeOut(img4_lbl,img4),Write(prop_title))) 
+        self.next_slide()
+        self.play(FadeIn(img5))
+        for item in steps2:
+            self.play(Write(item))
+            self.next_slide()
+
+        self.play(Succession(FadeOut(img5,steps2),FadeIn(img6)))
+        for item in steps3:
+            self.play(Write(item))
+            self.next_slide()
+        
+        self.play(Succession(FadeOut(img6,steps3),FadeIn(img7)))
+        for item in steps4:
+            self.play(Write(item))
+            self.next_slide()
+
+
+
+class Relation(Slide):
+    def construct(self):
+        title = Title('CHAPTER 2 : ELECTROSTATIC POTENTIAL AND CAPACITANCE',font_size=40,color=GREEN,match_underline_width_to_text=True)
+        Outline = Tex('Learning Objectives :',color=BLUE).next_to(title,DOWN,buff=0.5).to_corner(LEFT).scale(0.8)
+        list = BulletedList('INTRODUCTION','ELECTROSTATIC POTENTIAL',r'POTENTIAL DUE TO\\ A POINT CHARGE',r'POTENTIAL DUE TO\\ A SYSTEM OF CHARGES',r'POTENTIAL DUE TO AN\\ ELECTRIC DIPOLE',' EQUIPOTENTIAL SURFACES',
+                            r' RELATION BETWEEN FIELD\\ AND POTENTIAL',r'POTENTIAL ENERGY OF A SYSTEM\\ OF CHARGES').scale(0.7).next_to(Outline,DOWN).to_corner(LEFT).shift(0.1*RIGHT)
+
+    
+        list2 = BulletedList(r'POTENTIAL ENERGY IN\\ AN EXTERNAL FIELD',r'POTENTIAL ENERGY OF A DIPOLE\\ IN AN EXTERNAL FIELD','ELECTROSTATICS OF CONDUCTORS','DIELECTRICS AND POLARISATION',
+                             'CAPACITORS AND CAPACITANCE','COMBINATION OF CAPACITORS',r"ENERGY STORED IN\\ A CAPACITOR").scale(0.7).next_to(Outline,DOWN).to_corner(RIGHT)
+        
+        self.add(title,Outline,list,list2)
+        self.next_slide(loop=True)
+        self.play(FocusOn(list[6]))
+        self.play(Circumscribe(list[6]))
+        self.next_slide()
+        self.play(RemoveTextLetterByLetter(list2))
+        self.play(RemoveTextLetterByLetter(list))
+        self.play(RemoveTextLetterByLetter(Outline))
+        Intro_title = Title('RELATION BETWEEN FIELD AND POTENTIAL', font_size=40,color=BLUE,underline_buff=SMALL_BUFF,match_underline_width_to_text=True)
+        self.play(ReplacementTransform(title,Intro_title))
+        self.next_slide()
