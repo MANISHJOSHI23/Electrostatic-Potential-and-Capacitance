@@ -890,3 +890,35 @@ class Relation(Slide):
         Intro_title = Title('RELATION BETWEEN FIELD AND POTENTIAL', font_size=40,color=BLUE,underline_buff=SMALL_BUFF,match_underline_width_to_text=True)
         self.play(ReplacementTransform(title,Intro_title))
         self.next_slide()
+        steps1 = ItemList(Item(r"Consider two closely spaced equipotential surfaces with potential values $V$ and $V + dV$.",pw="13 cm",color=GREEN),
+                          Item(r"$dr$  is the perpendicular distance between the two equipotential surfaces.",pw="13 cm",color=GREEN),
+                          Item(r" Imagine that a unit positive charge $(q)$ is moved from point A to point B",pw="13 cm",color=GREEN),
+                          Item(r"$d\vec{s}$ is the displacement vector from A to B",pw="8 cm",color=GREEN),
+                          Item(r"Work done by the electric field $\vec{E}$ is",pw="8 cm",color=ORANGE),
+                          Item(r"$dW_{\text{field}} = \vec{F_E}\cdot d\vec{s}$ ",r"$=q\vec{E}\cdot d\vec{s}$",pw="8 cm",dot=False,color=ORANGE),
+                          Item(r"$dW_{\text{field}} = qE ds\cos\theta$ ",r"$=qE dr\ (\because dr=ds\cos\theta)$",pw="8 cm",dot=False,color=ORANGE),
+                          Item(r"Change in Potential energy $= -$ Work done by field:",pw="8 cm",color=YELLOW_C),
+                          Item(r"$dU= - dW_{\text{field}} $",r"$=-qE dr$",color=YELLOW_C,pw="8 cm",dot=False),
+                          buff=0.45).next_to(Intro_title,DOWN).to_edge(LEFT).set_z_index(2)
+        
+        img1 = ImageMobject("rel1.png").scale(1).next_to(steps1[4],RIGHT).align_to(steps1[3],UP).to_edge(RIGHT)
+        img2 = ImageMobject("rel2.png").scale(1).next_to(steps1[4],RIGHT).align_to(steps1[3],UP).to_edge(RIGHT)
+        anm1 = [Succession(FadeIn(img1),Write(steps1[0])),Write(steps1[1]),Succession(FadeIn(img2),Write(steps1[2])),Write(steps1[3]),Write(steps1[4]),Write(steps1[5][0]),Write(steps1[5][1]),Write(steps1[6][0]),Write(steps1[6][1]),Write(steps1[7]),Write(steps1[8][0]),Write(steps1[8][1]),Succession(FadeOut(steps1[0:7]),VGroup(steps1[7],steps1[8]).animate.next_to(Intro_title,DOWN).to_corner(LEFT),Group(img1,img2).animate.next_to(Intro_title,DOWN).to_corner(RIGHT))]
+        
+        for item in anm1:
+            self.play(item)
+            self.next_slide()
+
+        steps2 = ItemList(Item(r"Change in Potential $dV=\dfrac{dU}{q}$",pw="8 cm",color=RED),
+                          Item(r"$dV =- E dr$",color=PURE_RED,pw="8 cm",dot=False),
+                          Item(r"$E=-\dfrac{dV}{dr}$",color=PURE_RED,pw="8 cm",dot=False),
+                          Item(r"Electric field is in the direction in which the potential decreases steepest.",color=GOLD,pw="13 cm"),
+                          Item(r"Magnitude of Electric field is given by the change in the magnitude of potential (dV) per unit displacement (dr) normal to the equipotential surface at the point.",color=GOLD,pw="13 cm"),
+                          buff=0.45).next_to(steps1[8],DOWN).to_edge(LEFT).set_z_index(2)
+        
+        sr1 = SurroundingRectangle(steps2[1])
+        sr2 = SurroundingRectangle(steps2[2])
+        anm2 = [Write(steps2[0]),Succession(Write(steps2[1]),Write(sr1)),Succession(Write(steps2[2]),Write(sr2)),Write(steps2[3]),Write(steps2[4])]
+        for item in anm2:
+            self.play(item)
+            self.next_slide()
