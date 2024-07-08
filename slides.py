@@ -669,6 +669,40 @@ class DipolePotential(Slide):
             self.play(Write(item))
             self.next_slide()
 
+class Ex4(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 4 :", r"The electric potential at a distance 3 m on the axis of a short dipole of dipole moment $4\times 10^{-2}$ coulomb-metre is",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+        self.next_slide()
+
+        op = VGroup(Tex(r'(a) 1.33 mV ',font_size=35),Tex(r'(b) 4 mV ',font_size=35),Tex(r'(c) 12 mV',font_size=35),Tex(r'(d) 27 mV',font_size=35) ).arrange_in_grid(2,2,buff=(4,0.3),col_alignments='ll').next_to(ex_title,DOWN)
+
+        sol_label =Tex('Solution: ',font_size=35, color=ORANGE).next_to(op,DOWN).align_to(ex_title,LEFT)
+        self.play(Write(op))
+        self.next_slide()
+        self.play(Write(sol_label)) 
+        self.next_slide(loop=True)
+        self.play(Circumscribe(op[1]))
+
+class Ex5(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 5 :", r"The electric potential in volts due to an electric dipole of dipole moment $2\times 10^{-8}$ coulomb-metre at a distance of 3 m on a line making an angle of $60^\circ$ with the axis of the dipole is",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+        self.next_slide()
+
+        op = VGroup(Tex(r'(a) Zero ',font_size=35),Tex(r'(b) 10 ',font_size=35),Tex(r'(c) 20',font_size=35),Tex(r'(d) 40',font_size=35) ).arrange_in_grid(2,2,buff=(4,0.3),col_alignments='ll').next_to(ex_title,DOWN)
+
+        sol_label =Tex('Solution: ',font_size=35, color=ORANGE).next_to(op,DOWN).align_to(ex_title,LEFT)
+        self.play(Write(op))
+        self.next_slide()
+        self.play(Write(sol_label)) 
+        self.next_slide(loop=True)
+        self.play(Circumscribe(op[1]))
+
 class Shell(Slide):
     def construct(self):
         Intro_title = Title('POTENTIAL DUE TO A UNIFORMLY CHARGED SPHERICAL SHELL', font_size=40,color=BLUE,underline_buff=SMALL_BUFF,match_underline_width_to_text=True)
@@ -922,3 +956,182 @@ class Relation(Slide):
         for item in anm2:
             self.play(item)
             self.next_slide()
+
+class Ex6(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 6 :", r"The electric potential $V$ at a point  $P(x,y,z)$ in space is given by $V=4x^2$ volt. Electric field at point (1m, 0, 2m) in V/m is",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+        self.next_slide()
+
+        op = VGroup(Tex(r'(a) 8 along -ve x-axis ',font_size=35),Tex(r'(b) 8 along +ve x-axis ',font_size=35),Tex(r'(c) 16 along -ve x-axis',font_size=35),Tex(r'(d) 16 along +ve x-axis ',font_size=35) ).arrange_in_grid(2,2,buff=(4,0.3),col_alignments='ll').next_to(ex_title,DOWN)
+
+        sol_label =Tex('Solution: ',font_size=35, color=ORANGE).next_to(op,DOWN).align_to(ex_title,LEFT)
+        self.play(Write(op))
+        self.next_slide()
+        self.play(Write(sol_label)) 
+        self.next_slide(loop=True)
+        self.play(Circumscribe(op[0]))
+
+class Ex7(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 7 :", r"Figure shows the variation of electric field intensity $E$ versus distance $x$. What is the potential difference between the points at $x=2$ m and $x=6$ m from O?",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+        self.next_slide()
+
+        op = VGroup(Tex(r'(a) 30 V',font_size=35),Tex(r'(b) 60 V',font_size=35),Tex(r'(c) 40 V',font_size=35),Tex(r'(d) 80 V ',font_size=35) ).arrange_in_grid(2,2,buff=(4,0.3),col_alignments='ll').next_to(ex_title,DOWN)
+
+        sol_label =Tex('Solution: ',font_size=35, color=ORANGE).next_to(op,DOWN).align_to(ex_title,LEFT)
+        axes_2 = (Axes(
+        x_range=[0, 8, 2],
+        y_range=[0, 15, 5],
+        y_length=3,
+        x_length=5,
+        axis_config={'tip_shape': StealthTip,"tip_width":0.08,"tip_height":0.15,"include_numbers": True},
+        y_axis_config={"include_ticks": True,"exclude_origin_tick":False}
+      ).set_color(GREEN_C)).next_to(sol_label,DOWN).to_edge(RIGHT)
+        axes_labels = axes_2.get_axis_labels(x_label=Tex(r"$x(m)$",font_size=30), y_label=Tex(r"$E\ (N/C)$",font_size=30))
+        axes_2.get_x_axis().add_labels({0:Tex("O",color=GREEN)})
+        
+
+        func1 = axes_2.plot(lambda x: 5*x, x_range=[0, 2], color=BLUE)
+        func2 = axes_2.plot(lambda x: 10, x_range=[2, 4], color=BLUE)
+        func3 = axes_2.plot(lambda x: -5*x+30, x_range=[4, 6], color=BLUE)
+        lines = VGroup(axes_2.get_lines_to_point(axes_2.c2p(2,10),color=RED),
+                       axes_2.get_lines_to_point(axes_2.c2p(4,10),color=RED),)
+        
+        self.next_slide()
+        self.play(Create(axes_2),Create(axes_labels))
+        self.wait(1)
+        self.play(Succession(Create(func1),Create(func2),Create(func3),Create(lines)))
+        self.next_slide()
+        self.play(Write(op))
+        self.next_slide()
+        self.play(Write(sol_label)) 
+        self.next_slide(loop=True)
+        self.play(Circumscribe(op[0]))
+
+
+class Ex8(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 8 :", r"An infinite plane sheet of charge density $10^{-8}\ Cm^{-2}$ is held in air. In this situation how far apart are two equipotential surfaces, whose potential difference is 5 V?",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+        self.next_slide()
+
+        op = VGroup(Tex(r'(a) 2.25 mm ',font_size=35),Tex(r'(b) 3.52 mm ',font_size=35),Tex(r'(c) 6 mm',font_size=35),Tex(r'(d) 8.85 mm ',font_size=35) ).arrange_in_grid(2,2,buff=(4,0.3),col_alignments='ll').next_to(ex_title,DOWN)
+
+        sol_label =Tex('Solution: ',font_size=35, color=ORANGE).next_to(op,DOWN).align_to(ex_title,LEFT)
+        self.play(Write(op))
+        self.next_slide()
+        self.play(Write(sol_label)) 
+        self.next_slide(loop=True)
+        self.play(Circumscribe(op[3]))
+
+class Ex9(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 9 :", r"A uniform electric field $E$ of 500 N/C is directed along +x-axis. O, B and A are three points in the field having x- and y-coordinates (in cm) (0, 0), (4, 0) and  (0, 3) respectively. Calculate the potential difference between the points (i) O and A, and (ii) O and B. \quad [CBSE 23C]",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        fig = VGroup()
+        for i in [3.5,2.5,1.5,0.5,-0.5]:
+            fig.add(Arrow(start=1*LEFT+i*UP,end=5*RIGHT+i*UP,color=RED,tip_length=0.2))
+        
+        fig.add(MyLabeledDot(label_out=Tex(r"O\\ (0,0)",font_size=30),pos=0.2*DOWN,radius=0.04),MyLabeledDot(label_out=Tex(r"B\\ (4,0)",font_size=30),point=4*RIGHT,pos=0.2*DOWN,radius=0.04),MyLabeledDot(label_out=Tex(r"A\\ (0,3)",font_size=30),point=3*UP,pos=0.2*LEFT,radius=0.04),Tex(r"E",font_size=30,color=RED).shift(5.2*RIGHT+1.5*UP))
+        fig.add(DashedLine(start=0*LEFT+0*UP,end=4*RIGHT,color=GREEN_B),
+                DashedLine(start=0*LEFT+0*UP,end=3*UP,color=GREEN_B))
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+        self.next_slide()
+        sol_label =Tex('Solution: ',font_size=35, color=ORANGE).next_to(ex_title,DOWN).align_to(ex_title,LEFT)
+        self.play(Write(sol_label)) 
+        self.play(Write(fig.next_to(ex_title,DOWN).to_edge(RIGHT)))
+        
+class Ex10(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 10 :", r"Three points A, B and C lie in a uniform electric field $(E)$ of $5\times 10^3\ NC^{-1}$ as shown in the figure. Find the potential difference between A and C. [CBSE F 09]",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        fig = VGroup()
+        for i in [2,1,0,-1]:
+            fig.add(Arrow(start=3*LEFT+i*UP,end=3*RIGHT+i*UP,color=RED,tip_length=0.2))
+        
+        fig.add(MyLabeledDot(label_out=Tex(r"A",font_size=30),point=LEFT+1.5*UP,pos=0.2*LEFT,radius=0.02),MyLabeledDot(label_out=Tex(r"B",font_size=30),point=RIGHT+1.5*UP,pos=0.2*RIGHT,radius=0.02),MyLabeledDot(label_out=Tex(r"C",font_size=30),point=RIGHT-0.5*UP,pos=0.2*RIGHT,radius=0.02),Tex(r"E",font_size=30,color=RED).shift(3.2*RIGHT))
+        ex_title[0].set_color(GREEN)
+        fig.add(MyDashLabeledLine(label=Tex("5 cm",font_size=30),pos=0.3*DOWN,start=LEFT+1.5*UP,end=RIGHT-0.5*UP,color=GREEN_B),
+                MyDashLabeledLine(label=Tex("3 cm",font_size=30),pos=0.3*RIGHT,start=RIGHT+1.5*UP,end=RIGHT-0.5*UP,color=GREEN_B),
+                DashedLine(start=LEFT+1.5*UP,end=RIGHT+1.5*UP,color=GREEN_B))
+        self.play(Write(ex_title),Write(fig.next_to(ex_title,DOWN).to_edge(RIGHT)))
+        sol_label =Tex('Solution: ',font_size=35, color=ORANGE).next_to(ex_title,DOWN).align_to(ex_title,LEFT)
+        self.next_slide()
+        self.play(Write(sol_label)) 
+
+
+class Ex11(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 11 :", r"If the potential in the region of space around the point (-1 m, 2 m, 3 m) is given by $V=(10x^2+5y^2-3z^2)$ volt, calculate the three components of electric field at this point.",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+        self.next_slide()
+        sol_label =Tex('Solution: ',font_size=35, color=ORANGE).next_to(ex_title,DOWN).align_to(ex_title,LEFT)
+        self.play(Write(sol_label)) 
+
+class SystemEnergy(Slide):
+    def construct(self):
+        title = Title('CHAPTER 2 : ELECTROSTATIC POTENTIAL AND CAPACITANCE',font_size=40,color=GREEN,match_underline_width_to_text=True)
+        Outline = Tex('Learning Objectives :',color=BLUE).next_to(title,DOWN,buff=0.1).to_corner(LEFT).scale(0.8)
+        list = BulletedList('INTRODUCTION','ELECTROSTATIC POTENTIAL',r'POTENTIAL DUE TO\\ A POINT CHARGE',r'POTENTIAL DUE TO\\ A SYSTEM OF CHARGES',r'POTENTIAL DUE TO AN\\ ELECTRIC DIPOLE',' EQUIPOTENTIAL SURFACES',
+                            r' RELATION BETWEEN FIELD\\ AND POTENTIAL').scale(0.7).next_to(Outline,DOWN,buff=0.2).to_corner(LEFT).shift(0.1*RIGHT)
+
+    
+        list2 = BulletedList(r'POTENTIAL ENERGY OF A SYSTEM\\ OF CHARGES',r'POTENTIAL ENERGY IN\\ AN EXTERNAL FIELD',r'POTENTIAL ENERGY OF A DIPOLE\\ IN AN EXTERNAL FIELD','ELECTROSTATICS OF CONDUCTORS','DIELECTRICS AND POLARISATION',
+                             'CAPACITORS AND CAPACITANCE','COMBINATION OF CAPACITORS',r"ENERGY STORED IN A CAPACITOR").scale(0.7).next_to(Outline,DOWN,buff=0.2).to_corner(RIGHT)
+        
+        self.add(title,Outline,list,list2)
+        self.next_slide(loop=True)
+        self.play(FocusOn(list2[0]))
+        self.play(Circumscribe(list2[0]))
+        self.next_slide()
+        self.play(RemoveTextLetterByLetter(list2))
+        self.play(RemoveTextLetterByLetter(list))
+        self.play(RemoveTextLetterByLetter(Outline))
+        Intro_title = Title('POTENTIAL ENERGY OF A SYSTEM OF CHARGES', font_size=40,color=BLUE,underline_buff=SMALL_BUFF,match_underline_width_to_text=True)
+        self.play(ReplacementTransform(title,Intro_title))
+        self.next_slide()
+
+        steps1 = ItemList(Item(r"The electric potential energy of a system of fixed point charges is equal to the work that must be done by an external agent to assemble the system, bring the charges in from  an infinite distance.",pw="7.2 cm",color=YELLOW_D),
+                          buff=0.45).next_to(Intro_title,DOWN).to_edge(LEFT,buff=0.2)
+        
+        self.play(Write(steps1))
+
+        axes = (Axes(
+        x_range=[0, 10, 2],
+        y_range=[0, 10, 2],
+        y_length=4.5,
+        x_length=5,
+        axis_config={'tip_shape': StealthTip,"tip_width":0.08,"tip_height":0.15,"include_ticks":False},
+      ).set_color(GREEN_C))
+        axes.get_x_axis().add_labels({0:Tex("O",color=GREEN_C)})
+        A = MyLabeledDot(label_out=Tex(r"A",font_size=30,color=RED),point=axes.c2p(2,8.5),radius=0.04,pos=0.4*LEFT,color=RED)
+        B = MyLabeledDot(label_out=Tex(r"B",font_size=30,color=YELLOW),point=axes.c2p(5,2),radius=0.04,pos=0.4*DOWN,color=YELLOW)
+        C = MyLabeledDot(label_out=Tex(r"C",font_size=30,color=GREEN),point=axes.c2p(8,7.5),radius=0.04,pos=0.4*RIGHT,color=GREEN)
+        inf = MyLabeledDot(label_out=Tex(r"$\infty$",font_size=30,color=GOLD),point=axes.c2p(10.5,13.5),radius=0.01,pos=0.2*UP,
+        color=GREEN)
+        r12 = MyLabeledLine(label=Tex(r"$r_{12}$",font_size=30),pos=0.2*LEFT,start=A[0].get_center(),end=B[0].get_center(),color=DARK_BROWN)
+        r23 = MyLabeledLine(label=Tex(r"$r_{23}$",font_size=30),pos=0.2*RIGHT,start=B[0].get_center(),end=C[0].get_center(),color=DARK_BROWN)
+        r13 = MyLabeledLine(label=Tex(r"$r_{13}$",font_size=30),pos=0.2*UP,start=A[0].get_center(),end=C[0].get_center(),color=DARK_BROWN)
+        q1 = MyLabeledDot(label_in=Tex(r"$q_1$",font_size=25,color=BLACK),point=axes.c2p(9.5,12.75),color=RED)
+        q2 = MyLabeledDot(label_in=Tex(r"$q_2$",font_size=25,color=BLACK),point=axes.c2p(10,12.75),color=YELLOW)
+        q3 = MyLabeledDot(label_in=Tex(r"$q_3$",font_size=25,color=BLACK),point=axes.c2p(10.5,12.75),color=GREEN)
+        fig = VGroup(axes,A,B,C,inf,r12,r13,r23,q1,q2,q3).next_to(Intro_title,DOWN).to_edge(RIGHT)
+        self.play(Write(fig))
+        self.play(MoveAlongPath(q1,Line(start=q1[0].get_center(),end=A[0].get_center())))
+        self.wait()
+        self.play(MoveAlongPath(q2,Line(start=q2[0].get_center(),end=B[0].get_center())))
+        self.wait()
+        self.play(MoveAlongPath(q3,Line(start=q3[0].get_center(),end=C[0].get_center())))
+        self.wait()
