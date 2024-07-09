@@ -1101,12 +1101,25 @@ class SystemEnergy(Slide):
         self.play(RemoveTextLetterByLetter(Outline))
         Intro_title = Title('POTENTIAL ENERGY OF A SYSTEM OF CHARGES', font_size=40,color=BLUE,underline_buff=SMALL_BUFF,match_underline_width_to_text=True)
         self.play(ReplacementTransform(title,Intro_title))
-        self.next_slide()
+        self.next_slide(loop=True)
 
-        steps1 = ItemList(Item(r"The electric potential energy of a system of fixed point charges is equal to the work that must be done by an external agent to assemble the system, bring the charges in from  an infinite distance.",pw="7.2 cm",color=YELLOW_D),
-                          buff=0.45).next_to(Intro_title,DOWN).to_edge(LEFT,buff=0.2)
+        steps1 = ItemList(Item(r"The electric potential energy of a system of fixed point charges is equal to the work that must be done by an external agent to assemble the system, bring the charges in from  an infinite distance.",pw="10 cm",color=YELLOW_D),
+                          Item(r"Work done in moving charge $q_1$ first from $\infty$ to A:",pw="7.6 cm"),
+                          Item(r"$W_{q_1}=0\ ...(1)\ (\because$ no electrostatic force acting on it) ",pw="8 cm",dot=False),
+                          Item(r"Work done in moving charge $q_2$ from $\infty$ to B:",pw="7.3 cm"),
+                          Item(r"$W_{q_2}=q_2\times V_{q_1B}\ ( V_{q_1B}\rightarrow$ Potential due to $q_2$ at B.)",pw="8 cm",dot=False),
+                          Item(r"$W_{q_2}=q_2\times \dfrac{1}{4\pi\epsilon_0}\dfrac{q_1}{r_{12}}$",pw="8 cm",dot=False),
+                          Item(r"$W_{q_2}= \dfrac{1}{4\pi\epsilon_0}\dfrac{q_1q_2}{r_{12}}\ ...(2)$",pw="8 cm",dot=False),
+                          buff=0.42).next_to(Intro_title,DOWN).to_edge(LEFT,buff=0.2)
         
-        self.play(Write(steps1))
+        steps2 = ItemList(Item(r"Work done in moving charge $q_3$ from $\infty$ to C:",pw="11 cm"),
+                          Item(r"$W_{q_3}=q_3\times V_{q_1q_2C}\ ( V_{q_1q_2C}\rightarrow$ Potential due to $q_1$ and $q_2$ at C.)",pw="11 cm",dot=False),
+                          Item(r"$W_{q_3}=q_3\times \left[\dfrac{1}{4\pi\epsilon_0}\dfrac{q_1}{r_{13}}+\dfrac{1}{4\pi\epsilon_0}\dfrac{q_3}{r_{23}}\right]$",pw="8 cm",dot=False),
+                          Item(r"$W_{q_3}= \dfrac{1}{4\pi\epsilon_0}\left[\dfrac{q_1q_3}{r_{13}}+\dfrac{q_2q_3}{r_{23}}\right]\ ...(3)$",pw="8 cm",dot=False),
+                          Item(r"Total work done in assembling the system of charges:",color=ORANGE,pw="8 cm"),
+                          Item(r"$W=W_{q_1}+W_{q_2}+W_{q_3}$",color=ORANGE,pw="8 cm",dot=False),
+                          Item(r"$W=0+\dfrac{1}{4\pi\epsilon_0}\dfrac{q_1q_2}{r_{12}}+\dfrac{1}{4\pi\epsilon_0}\left[\dfrac{q_1q_3}{r_{13}}+\dfrac{q_2q_3}{r_{23}}\right]$",color=ORANGE,pw="8 cm",dot=False),
+                          buff=0.42).next_to(Intro_title,DOWN).to_edge(LEFT,buff=0.2)
 
         axes = (Axes(
         x_range=[0, 10, 2],
@@ -1127,7 +1140,7 @@ class SystemEnergy(Slide):
         q1 = MyLabeledDot(label_in=Tex(r"$q_1$",font_size=25,color=BLACK),point=axes.c2p(9.5,12.75),color=RED)
         q2 = MyLabeledDot(label_in=Tex(r"$q_2$",font_size=25,color=BLACK),point=axes.c2p(10,12.75),color=YELLOW)
         q3 = MyLabeledDot(label_in=Tex(r"$q_3$",font_size=25,color=BLACK),point=axes.c2p(10.5,12.75),color=GREEN)
-        fig = VGroup(axes,A,B,C,inf,r12,r13,r23,q1,q2,q3).next_to(Intro_title,DOWN).to_edge(RIGHT)
+        fig = VGroup(axes,A,B,C,inf,r12,r13,r23,q1,q2,q3).next_to(Intro_title,DOWN).to_edge(RIGHT,buff=0.1)
         self.play(Write(fig))
         self.play(MoveAlongPath(q1,Line(start=q1[0].get_center(),end=A[0].get_center())))
         self.wait()
@@ -1135,3 +1148,45 @@ class SystemEnergy(Slide):
         self.wait()
         self.play(MoveAlongPath(q3,Line(start=q3[0].get_center(),end=C[0].get_center())))
         self.wait()
+        self.next_slide()
+        self.play(Write(steps1[0]))
+        self.next_slide()
+        self.play(q1.animate.move_to(axes.c2p(9.5,12.75)),q2.animate.move_to(axes.c2p(10,12.75)),q3.animate.move_to(axes.c2p(10.5,12.75)))
+        self.play(Write(steps1[1]),MoveAlongPath(q1,Line(start=q1[0].get_center(),end=A[0].get_center())))
+        self.next_slide()
+        self.play(Write(steps1[2]))
+        self.next_slide()
+        self.play(Write(steps1[3]),MoveAlongPath(q2,Line(start=q2[0].get_center(),end=B[0].get_center())))
+        self.next_slide()
+        self.play(Write(steps1[4]))
+        self.next_slide()
+        self.play(Write(steps1[5]))
+        self.next_slide()
+        self.play(Write(steps1[6]))
+        self.next_slide()
+        self.play(FadeOut(steps1))
+        self.play(Write(steps2[0]),MoveAlongPath(q3,Line(start=q3[0].get_center(),end=C[0].get_center())))
+        self.next_slide()
+        self.play(Write(steps2[1]))
+        self.next_slide()
+        self.play(Write(steps2[2]))
+        self.next_slide()
+        self.play(Write(steps2[3]))
+        self.next_slide()
+        self.play(Write(steps2[4]))
+        self.next_slide()
+        self.play(Write(steps2[5]))
+        self.next_slide()
+        self.play(Write(steps2[6]))
+        self.next_slide()
+        self.play(FadeOut(steps2[0:4]),VGroup(steps2[4:7]).animate.next_to(Intro_title,DOWN).to_edge(LEFT,buff=0.2))
+        steps3 = ItemList(Item(r"This work don by external agent gets stored in the form of potential energy (U) of the system of charges",color=YELLOW,pw="7 cm"),
+                          Item(r"$U=\dfrac{1}{4\pi\epsilon_0}\left[\dfrac{q_1q_2}{r_{12}}+\dfrac{q_1q_3}{r_{13}}+\dfrac{q_2q_3}{r_{23}}\right]$",pw="8 cm",color=YELLOW,dot=False),
+                          Item(r"The potential energy (U) of a system of charges is independent of the manner in which the configuration of charges is assembled.",color=GOLD,pw="7 cm"),
+                          buff=0.42).next_to(steps2[6],DOWN).to_edge(LEFT)
+        for item in steps3:
+            self.play(Write(item))
+            self.next_slide()
+        self.play(Write(SurroundingRectangle(steps3[1])))
+        self.wait(3)
+
