@@ -1187,6 +1187,60 @@ class SystemEnergy(Slide):
         for item in steps3:
             self.play(Write(item))
             self.next_slide()
-        self.play(Write(SurroundingRectangle(steps3[1])))
+        self.play(Write(SurroundingRectangle(steps3[1],color=PINK)))
         self.wait(3)
+
+class Ex12(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 12 :", r"Four charges are arranged at the corners of a square ABCD of side d, as shown in Fig.\\(a) Find the work required to put together this arrangement.\\", r"(b) A charge $q_0$ is brought to the centre E of the square, the four charges being held fixed at its corners. How much extra work is needed to do this? [NCERT]",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        sq = Square(4)
+        q1 = MyLabeledDot(label_in=Tex(r"$+q$",font_size=25,color=BLACK),label_out=Tex(r"$A$",font_size=25),pos=0.2*LEFT,point=2*UP+2*LEFT,color=RED)
+        q2 = MyLabeledDot(label_in=Tex(r"$-q$",font_size=25,color=BLACK),label_out=Tex(r"$B$",font_size=25),pos=0.2*RIGHT,point=2*UP+2*RIGHT,color=RED)
+        q3 = MyLabeledDot(label_in=Tex(r"$+q$",font_size=25,color=BLACK),label_out=Tex(r"$C$",font_size=25),pos=0.2*RIGHT,point=2*DOWN+2*RIGHT,color=RED)
+        q4 = MyLabeledDot(label_in=Tex(r"$-q$",font_size=25,color=BLACK),label_out=Tex(r"$D$",font_size=25),pos=0.2*LEFT,point=2*DOWN+2*LEFT,color=RED)
+        q0 = MyLabeledDot(label_in=Tex(r"$q_0$",font_size=25,color=BLACK),label_out=Tex(r"$E$",font_size=25),pos=0.2*DOWN,point=sq.get_center(),color=YELLOW)
+        d = Tex(r"$d$",font_size=25).next_to(sq,RIGHT,buff=0.1)
+        fig = VGroup(sq,q1,q2,q3,q4,d,q0).next_to(ex_title,DOWN).to_edge(RIGHT)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title[0:2]),Write(fig[0:-1]))
+        self.next_slide()
+        self.play(Write(ex_title[2]),Write(q0))
+        self.next_slide()
+        sol_label =Tex('Solution: ',font_size=35, color=ORANGE).next_to(ex_title,DOWN).align_to(ex_title,LEFT)
+        self.play(Write(sol_label)) 
+
+
+class Ex13(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 13 :", r"(a) Determine the electrostatic potential energy of a system consisting of two charges 7 $\mu$C and $-2\ \mu C$ (and with no external field) placed at $(-9$ cm, 0, 0) and (9 cm, 0, 0) respectively.\\ \\",r"(b) How much work is required to separate the two charges infinitely away from each other?\\ \\",r"(c) Suppose that the same system of charges is now placed in an external electric field $E = A \left(\dfrac{1}{r^2}\right)$; $A = 9 \times 10^5\ NC^{-1} m^2$. What would the electrostatic energy of the configuration be? [NCERT]",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        for item in ex_title:
+            self.play(Write(item))
+            self.next_slide()
+        sol_label =Tex('Solution: ',font_size=35, color=ORANGE).next_to(ex_title,DOWN).align_to(ex_title,LEFT)
+        self.play(Write(sol_label)) 
+
+class Ex14(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 14 : ", r"Two protons are separated by a distance $R$. What will be the speed of each proton when they reach infinity under their mutual repulsion?",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        for item in ex_title:
+            self.play(Write(item))
+            self.next_slide()
+        sol_label =Tex('Solution: ',font_size=35, color=ORANGE).next_to(ex_title,DOWN).align_to(ex_title,LEFT)
+        self.play(Write(sol_label)) 
+
+class Ex15(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 15 : ", r"Two particles have equal masses of 5 g each and opposite charges of $4\times 10^{-5}$ C and $-4\times 10^{-5}$ C. They are released from rest with a separation of 1 m between them. Find the speed of particles when the separation is reduced to 50 cm.",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        for item in ex_title:
+            self.play(Write(item))
+            self.next_slide()
+        sol_label =Tex('Solution: ',font_size=35, color=ORANGE).next_to(ex_title,DOWN).align_to(ex_title,LEFT)
+        self.play(Write(sol_label)) 
 
