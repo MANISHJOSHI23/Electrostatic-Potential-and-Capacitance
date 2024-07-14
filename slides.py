@@ -1244,7 +1244,7 @@ class Ex15(Slide):
         sol_label =Tex('Solution: ',font_size=35, color=ORANGE).next_to(ex_title,DOWN).align_to(ex_title,LEFT)
         self.play(Write(sol_label)) 
 
-lass DipolePE(Slide):
+class DipolePE(Slide):
     def construct(self):
         title = Title('CHAPTER 2 : ELECTROSTATIC POTENTIAL AND CAPACITANCE',font_size=40,color=GREEN,match_underline_width_to_text=True)
         Outline = Tex('Learning Objectives :',color=BLUE).next_to(title,DOWN,buff=0.1).to_corner(LEFT).scale(0.8)
