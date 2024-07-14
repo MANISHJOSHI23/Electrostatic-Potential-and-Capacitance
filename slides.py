@@ -1244,3 +1244,234 @@ class Ex15(Slide):
         sol_label =Tex('Solution: ',font_size=35, color=ORANGE).next_to(ex_title,DOWN).align_to(ex_title,LEFT)
         self.play(Write(sol_label)) 
 
+lass DipolePE(Slide):
+    def construct(self):
+        title = Title('CHAPTER 2 : ELECTROSTATIC POTENTIAL AND CAPACITANCE',font_size=40,color=GREEN,match_underline_width_to_text=True)
+        Outline = Tex('Learning Objectives :',color=BLUE).next_to(title,DOWN,buff=0.1).to_corner(LEFT).scale(0.8)
+        list = BulletedList('INTRODUCTION','ELECTROSTATIC POTENTIAL',r'POTENTIAL DUE TO\\ A POINT CHARGE',r'POTENTIAL DUE TO\\ A SYSTEM OF CHARGES',r'POTENTIAL DUE TO AN\\ ELECTRIC DIPOLE',' EQUIPOTENTIAL SURFACES',
+                            r' RELATION BETWEEN FIELD\\ AND POTENTIAL').scale(0.7).next_to(Outline,DOWN,buff=0.2).to_corner(LEFT).shift(0.1*RIGHT)
+
+    
+        list2 = BulletedList(r'POTENTIAL ENERGY OF A SYSTEM\\ OF CHARGES',r'POTENTIAL ENERGY IN\\ AN EXTERNAL FIELD',r'POTENTIAL ENERGY OF A DIPOLE\\ IN AN EXTERNAL FIELD','ELECTROSTATICS OF CONDUCTORS','DIELECTRICS AND POLARISATION',
+                             'CAPACITORS AND CAPACITANCE','COMBINATION OF CAPACITORS',r"ENERGY STORED IN A CAPACITOR").scale(0.7).next_to(Outline,DOWN,buff=0.2).to_corner(RIGHT)
+        
+        self.add(title,Outline,list,list2)
+        self.next_slide(loop=True)
+        self.play(FocusOn(list2[2]))
+        self.play(Circumscribe(list2[2]))
+        self.next_slide()
+        self.play(RemoveTextLetterByLetter(list2))
+        self.play(RemoveTextLetterByLetter(list))
+        self.play(RemoveTextLetterByLetter(Outline))
+        Intro_title = Title('POTENTIAL ENERGY OF A DIPOLE IN AN EXTERNAL FIELD', font_size=40,color=BLUE,underline_buff=SMALL_BUFF,match_underline_width_to_text=True)
+        self.play(ReplacementTransform(title,Intro_title))
+        self.next_slide()
+
+        steps1 = ItemList(Item(r"Consider a dipole of dipole moment $p=q\times 2a$,", r" placed in a uniform external field $\vec{E}$.",pw="13 cm",color=YELLOW_D),
+                          Item(r"Torque experienced by dipole $\tau=pE\sin\theta$",pw="7.6 cm"),
+                          Item(r"Work done$(dW)$ by external torque ($\vec{\tau}_{ext}=\vec{\tau}$) in rotating the dipole from angle $\theta_{i}$ to $(\theta_{i}+d\theta)$ ",pw="7.8 cm"),
+                          Item(r"$dW = \tau_{ext}\ d\theta$",r"$ =pE\sin\theta\ d\theta$",pw="7.3 cm",dot=False),
+                          Item(r"Now, total work done by external torque in rotating the dipole from $\theta_{i}$ to $\theta_{f}$",pw="6.5 cm",dot=False),
+                          Item(r"$W= \displaystyle \int_{\theta_i}^{\theta_f} pE\sin\theta \ d\theta$",r"$ = -pE\left[ \cos\theta \right]_{\theta_i}^{\theta_f}$",pw="8 cm",dot=False),
+                          Item(r"$W= -pE\left[\cos\theta_f-\cos\theta_i\right]$",pw="8 cm",dot=False),
+                          buff=0.42).next_to(Intro_title,DOWN).to_edge(LEFT,buff=0.2)
+        
+        
+        arrowgroup = VGroup()
+
+        for i in range(5):
+            arrowgroup.add(Arrow(start=ORIGIN,end=4.5*RIGHT,tip_length=0.2,color=GREY,buff=0).set_z_index(0).shift(i*0.8*DOWN))
+
+        arrowgroup.add(Tex(r"$\vec{E}$",font_size=35).next_to(arrowgroup,DR,buff=0).shift(0.7*UP)).set_z_index(1)
+        lin =  Line(end=[3.5,-0.6,0],start= [1,-2.8,0],color=PINK).set_z_index(2)
+        q1 = always_redraw(lambda:MyLabeledDot(label_in=Tex("$+$",font_size=25,color=BLACK),label_out=Tex("$+q$",font_size=30,color=BLUE),pos=0.2*UP,point=lin.get_end(),color=BLUE)).set_z_index(2)
+        q2 = always_redraw(lambda:MyLabeledDot(label_in=Tex("$-$",font_size=25,color=BLACK),label_out=Tex("$-q$",font_size=30,color=GREEN),color=GREEN,pos=0.2*DOWN,point=lin.get_start())).set_z_index(2)
+        p  = always_redraw(lambda: Arrow(start=lin[0].get_center()-1.205*lin[0].get_unit_vector(),end= lin[0].get_center()+1.205*lin[0].get_unit_vector(),color=RED,tip_length=0.2)).set_z_index(2)
+        bline = DashedLine(start=lin[0].get_center(),end=lin[0].get_center()+1.5*RIGHT,stroke_width=2,color=BLUE).set_z_index(2)
+        ang = Angle(bline,lin[0],radius=0.4,quadrant=(1,1),color=YELLOW).set_z_index(2)
+        anglbl = Tex(r"$\theta_i$",font_size=30,color=YELLOW).next_to(ang,RIGHT,buff=0.1).set_z_index(2)
+        d2 = VGroup(DashedLine(end=[3.5,-0.6,0],start= [1,-2.8,0],color=PINK),q1.copy(),q2.copy(), MyLabeledArrow(label=Tex(r"$\vec{p}$",font_size=30,color=RED),start=lin[0].get_center()-1*lin[0].get_unit_vector(),end= lin[0].get_center()+1*lin[0].get_unit_vector(),color=RED,rel_pos=0.2,opacity=1,tip_length=0.2)).set_z_index(2)
+        dang = always_redraw(lambda:Angle(lin[0],d2[0][0],radius=0.5,quadrant=(1,1),color=WHITE,other_angle=True)).set_z_index(2)
+        dang_lbl = always_redraw(lambda:Tex(r"$d\theta$",font_size=30,color=WHITE).next_to(dang,UR,buff=0.01)).set_z_index(2)
+        ca1 = CurvedArrow(start_point=q1[0].get_left(),end_point=q1[0].get_left()+0.5*LEFT+0.5*UP,tip_length=0.1,color=BLUE_C)
+        ca1_lbl = Tex(r"$\tau_{\text{ext}}$",font_size=30,color=BLUE_C).move_to(ca1.get_end()).shift(0.25*LEFT)
+        ca2 = CurvedArrow(start_point=q2[0].get_right(),end_point=q2[0].get_right()+0.5*RIGHT+0.5*DOWN,tip_length=0.1,color=BLUE_C)
+        ca2_lbl = Tex(r"$\tau_{\text{ext}}$",font_size=30,color=BLUE_C).move_to(ca2.get_end()).shift(0.25*RIGHT)
+        fig = VGroup(arrowgroup,lin,q1,q2,p,bline,ang,anglbl,d2,dang,ca1,ca1_lbl,ca2,ca2_lbl,dang_lbl).next_to(Intro_title,DOWN).to_corner(DR,buff=0.8)
+
+        ca3 = ArcBetweenPoints(start=q1[0].get_right()-0.5*LEFT-0.5*UP,end=q1[0].get_right(),color=GREEN_B).add_tip(at_start=True,tip_shape=ArrowTriangleFilledTip,tip_width=0.1,tip_length=0.1)
+        ca3_lbl = Tex(r"$\tau$",font_size=30,color=GREEN_B).move_to(ca3.get_start()).shift(0.25*RIGHT)
+        ca4 = ArcBetweenPoints(start=q2[0].get_left()-0.5*RIGHT-0.5*DOWN,end=q2[0].get_left(),color=GREEN_B).add_tip(at_start=True,tip_shape=ArrowTriangleFilledTip,tip_width=0.1,tip_length=0.1)
+        ca4_lbl = Tex(r"$\tau$",font_size=30,color=GREEN_B).move_to(ca4.get_start()).shift(0.25*LEFT)
+        VGroup(ca1,ca1_lbl,ca3,ca3_lbl).next_to(q1[0].get_center(),UR,buff=0.1)
+        VGroup(ca2,ca2_lbl,ca4,ca4_lbl).next_to(q2[0].get_center(),DL,buff=0)
+        fig = VGroup(arrowgroup,lin,q1,q2,p,bline,ang,anglbl,d2,dang,ca3,ca3_lbl,ca4,ca4_lbl,ca1,ca1_lbl,ca2,ca2_lbl,dang_lbl).next_to(Intro_title,DOWN).to_corner(DR,buff=0.3)
+
+        anm1 = [Write(VGroup(steps1[0][0],q1,q2,lin,p,d2)),Write(VGroup(steps1[0][1],arrowgroup,bline,ang,anglbl)),Write(VGroup(steps1[1],ca3,ca3_lbl,ca4,ca4_lbl)), Succession(Write(VGroup(steps1[2],ca1,ca1_lbl,ca2,ca2_lbl)),lin.set_z_index(1).animate.rotate(angle=30*DEGREES),Succession(Write(dang),Write(dang_lbl))), Write(steps1[3][0]), Write(steps1[3][1]), Write(steps1[4]), Write(steps1[5][0]), Write(steps1[5][1]), Write(steps1[6]),Succession(FadeOut(steps1[0:-1]),steps1[6].animate.next_to(Intro_title,DOWN).to_edge(LEFT,buff=0.2))]
+        
+        for item in anm1:
+            self.play(item)
+            self.next_slide()
+        steps2 = ItemList(Item(r"This work done (W) is equal to the change in potential energy $(\Delta U)$ of the dipole",pw="13 cm",color=YELLOW_D),
+                          Item(r"$\Delta U = U_{\theta_f}-U_{\theta_i}= -pE\left[\cos\theta_f-\cos\theta_i\right]$",color=PINK,pw="8 cm",dot=False),
+                          Item(r" There is a freedom in choosing the angle where the potential energy $U$ is taken to be zero.", r" A natural choice is to take $\theta_i=\dfrac{\pi}{2}\ Or\ 90^\circ$. Or $(U_{90^\circ}=0)$ ",pw="8cm"),
+                          Item(r"$ U_{\theta}-U_{90^\circ}= -pE\left[\cos\theta-\cos (90^\circ)\right]$",pw="8 cm",dot=False),
+                          Item(r"$ U_{\theta}= -pEcos\theta$",color=PINK,pw="8 cm",dot=False),
+                          Item(r"Case 1: if $\theta = 0^\circ \rightarrow \ U_{min} = -PE $(Stable Equilibrium)",color=GOLD,pw="11 cm"),
+                          Item(r"Case 2: if $\theta = 180^\circ \rightarrow \ U_{max} = PE $(Unstable Equilibrium)",color=GOLD,pw="11 cm"),
+                          buff=0.42).next_to(steps1[6],DOWN).to_edge(LEFT,buff=0.2)
+        sr = SurroundingRectangle(steps2[1])
+        sr2 = SurroundingRectangle(steps2[4])
+        arrow = MyLabeledArrow(label=Tex("Potential Energy",font_size=35),start=sr2.get_right(),end=sr2.get_right()+1*RIGHT,tip_length=0.2,rel_pos=2.5,opacity=0)
+        arrow2 = MyLabeledArrow(label=Tex("Change in Potential Energy",font_size=35),start=sr.get_right(),end=sr.get_right()+1*RIGHT,tip_length=0.2,rel_pos=3.2,opacity=0)
+        
+        anm2 = [Write(steps2[0]),Succession(Write(steps2[1]),Write(sr),Write(arrow2)),Write(steps2[2][0]),Write(steps2[2][1]),Write(steps2[3]),Succession(Write(steps2[4]),Write(sr2),Write(arrow)),Write(steps2[5]),Write(steps2[6])]
+        for item in anm2:
+            self.play(item)
+            self.next_slide()
+
+
+class Ex16(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 16 :", r"An electric dipole of length 2 cm is placed with its axis making an angle of $30^\circ$ to a uniform electric field $10^5$ N/C. If it experiences a torque of $10\sqrt{3}$ Nm, then potential energy of the dipole ",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+        self.next_slide()
+
+        op = VGroup(Tex(r'(a) -10 J ',font_size=35),Tex(r'(b) -20 J ',font_size=35),Tex(r'(c) -30 J',font_size=35),Tex(r'(d) -40 J ',font_size=35) ).arrange_in_grid(2,2,buff=(4,0.3),col_alignments='ll').next_to(ex_title,DOWN)
+
+        sol_label =Tex('Solution: ',font_size=35, color=ORANGE).next_to(op,DOWN).align_to(ex_title,LEFT)
+        self.play(Write(op))
+        self.next_slide()
+        self.play(Write(sol_label)) 
+        self.next_slide(loop=True)
+        self.play(Circumscribe(op[3]))
+
+
+
+class Ex17(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 17 : ", r"An electric dipole in a uniform electric field E is turned from $\theta =0^\circ$ position to $\theta=60^\circ$ position. Find work done by the field.",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        for item in ex_title:
+            self.play(Write(item))
+            self.next_slide()
+        sol_label =Tex('Solution: ',font_size=35, color=ORANGE).next_to(ex_title,DOWN).align_to(ex_title,LEFT)
+        self.play(Write(sol_label)) 
+
+
+class Ex18(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 17 : ", r"A molecule of a substance has a permanent electric dipole moment of magnitude $10^{-29}$ C m. A mole of this substance is polarized (at low temperature) by applying a strong electrostatic field of magnitude $10^6\ V m^{-1}$. The direction of the field is suddenly changed by an angle of $60^\circ$. Estimate the heat released by the substance in aligning its dipoles along the new direction of the field. For simplicity, assume 100\% polarisation of the sample.",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        for item in ex_title:
+            self.play(Write(item))
+            self.next_slide()
+        sol_label =Tex('Solution: ',font_size=35, color=ORANGE).next_to(ex_title,DOWN).align_to(ex_title,LEFT)
+        self.play(Write(sol_label)) 
+
+
+
+class Conductor(Slide):
+    def construct(self):
+        title = Title('CHAPTER 2 : ELECTROSTATIC POTENTIAL AND CAPACITANCE',font_size=40,color=GREEN,match_underline_width_to_text=True)
+        Outline = Tex('Learning Objectives :',color=BLUE).next_to(title,DOWN,buff=0.1).to_corner(LEFT).scale(0.8)
+        list = BulletedList('INTRODUCTION','ELECTROSTATIC POTENTIAL',r'POTENTIAL DUE TO\\ A POINT CHARGE',r'POTENTIAL DUE TO\\ A SYSTEM OF CHARGES',r'POTENTIAL DUE TO AN\\ ELECTRIC DIPOLE',' EQUIPOTENTIAL SURFACES',
+                            r' RELATION BETWEEN FIELD\\ AND POTENTIAL').scale(0.7).next_to(Outline,DOWN,buff=0.2).to_corner(LEFT).shift(0.1*RIGHT)
+
+    
+        list2 = BulletedList(r'POTENTIAL ENERGY OF A SYSTEM\\ OF CHARGES',r'POTENTIAL ENERGY IN\\ AN EXTERNAL FIELD',r'POTENTIAL ENERGY OF A DIPOLE\\ IN AN EXTERNAL FIELD','ELECTROSTATICS OF CONDUCTORS','DIELECTRICS AND POLARISATION',
+                             'CAPACITORS AND CAPACITANCE','COMBINATION OF CAPACITORS',r"ENERGY STORED IN A CAPACITOR").scale(0.7).next_to(Outline,DOWN,buff=0.2).to_corner(RIGHT)
+        
+        self.add(title,Outline,list,list2)
+        self.next_slide(loop=True)
+        self.play(FocusOn(list2[3]))
+        self.play(Circumscribe(list2[3]))
+        self.next_slide()
+        self.play(RemoveTextLetterByLetter(list2))
+        self.play(RemoveTextLetterByLetter(list))
+        self.play(RemoveTextLetterByLetter(Outline))
+        Intro_title = Title('ELECTROSTATICS OF CONDUCTORS', font_size=40,color=BLUE,underline_buff=SMALL_BUFF,match_underline_width_to_text=True)
+        self.play(ReplacementTransform(title,Intro_title))
+        self.next_slide()
+        title = Tex(r"Conductors :",font_size=40,color=LOGO_RED).next_to(Intro_title,DOWN).to_edge(LEFT,buff=0.1)
+        self.play(Write(title))
+        steps1 = ItemList(Item(r"Conductors contains mobile/free charge carriers.",pw="13 cm"),
+                          Item(r"In metals charge carriers are outer (valance) electrons,", r" They are free to move within the metal but not free to leave the metal. ",pw="13 cm",color=YELLOW_D),
+                          Item(r"In an external field the free electrons drifts in opposite direction of field.", r" But the nuclei and bound electron remain held in their fixed position.",pw="13 cm"),
+                          Item(r"In electrolytic conductors the charge carriers are both positive and negative ions.",pw="13 cm"),
+                          Item(r"Electrostatic Condition $\rightarrow$ Assuming charges at rest.",color=PINK,pw="13 cm"),
+                          buff=0.5).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
+        
+        for item in steps1:
+            for subitem in item:
+                self.play(Write(subitem))
+                self.next_slide()
+
+        self.play(FadeOut(steps1,title))
+
+        steps2 = ItemList(Item(r"Under electrostatic condition, the conductors have following properties-",color=RED_D,pw="13 cm"),
+                          Item(r"(1) Inside a conductor, electrostatic  field is zero.",pw="8 cm",color=YELLOW_D),
+                          Item(r"Consider a charged/neutral conductor. There may also be an external field.",pw="8 cm",dot=False),
+                          Item(r"In static situation there is no current inside or at the surface, the free charges have so distribute themselves that electric field is zero everywhere inside",pw="8 cm",dot=False),
+                          Item(r"If there is a net electric field inside a conductor the free electrons will experience force and starts moving which results in the flow of current and violates the static condition.",dot=False,color=PINK,pw="13 cm"),
+                          buff=0.5).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
+        
+        steps3 = ItemList(Item(r"(2) At the surface of a charged conductor, electrostatic field must be normal to the surface at every point",color=YELLOW_D,pw="13 cm"),
+                          Item(r"If E were not normal to the surface, it would have some non-zero component along the surface.", r" Free charges on the surface of the conductor would then experience force and move.",pw="8 cm",dot=False),
+                          Item(r"In the static situation, therefore, E should have no tangential component.",pw="8 cm",dot=False),
+                          Item(r"$E\cos\theta=0\quad $",r"Or $\cos\theta=0$",dot=False,pw="13 cm"),
+                          Item(r"$\theta=90^\circ $",dot=False,pw="13 cm"),
+                          buff=0.5).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
+        
+        steps4 = ItemList(Item(r"(3)  The interior of a conductor can have no excess charge in the static situation, any excess charge must reside at the surface.",color=YELLOW_D,pw="13 cm"),
+                          buff=0.5).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
+        
+        steps5 = ItemList(Item(r"(4)  Electrostatic potential is constant throughout the volume of the conductor and has the same value (as inside) on its surface",color=YELLOW_D,pw="13 cm"),
+                          buff=0.5).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
+        
+        steps6 = ItemList(Item(r"(5)  Electric field at the surface of a charged conductor: $\vec{E}=\dfrac{\sigma}{\epsilon_0}\hat{n}$",color=YELLOW_D,pw="13 cm"),
+                          buff=0.5).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
+        
+        steps7 = ItemList(Item(r"(6) Electrostatic shielding",color=YELLOW_D,pw="13 cm"),
+                          buff=0.5).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
+        for item in steps2:
+            self.play(Write(item))
+            self.next_slide()
+
+        self.play(FadeOut(steps2))
+        
+        for item in steps3:
+            for subitem in item:
+                self.play(Write(subitem))
+                self.next_slide()
+
+        self.play(FadeOut(steps3))
+
+        for item in steps4:
+            self.play(Write(item))
+            self.next_slide()
+
+        self.play(FadeOut(steps4))
+
+        for item in steps5:
+            self.play(Write(item))
+            self.next_slide()
+
+        self.play(FadeOut(steps5))
+
+        for item in steps6:
+            self.play(Write(item))
+            self.next_slide()
+
+        self.play(FadeOut(steps6))
+
+        for item in steps7:
+            self.play(Write(item))
+            self.next_slide()
+
+        self.play(FadeOut(steps7))
+
