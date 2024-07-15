@@ -1397,7 +1397,7 @@ class Conductor(Slide):
         Intro_title = Title('ELECTROSTATICS OF CONDUCTORS', font_size=40,color=BLUE,underline_buff=SMALL_BUFF,match_underline_width_to_text=True)
         self.play(ReplacementTransform(title,Intro_title))
         self.next_slide()
-        title = Tex(r"Conductors :",font_size=40,color=LOGO_RED).next_to(Intro_title,DOWN).to_edge(LEFT,buff=0.1)
+        title = Tex(r"Conductors :",font_size=40,color=ORANGE).next_to(Intro_title,DOWN).to_edge(LEFT,buff=0.1)
         self.play(Write(title))
         steps1 = ItemList(Item(r"Conductors contains mobile/free charge carriers.",pw="13 cm"),
                           Item(r"In metals charge carriers are outer (valance) electrons,", r" They are free to move within the metal but not free to leave the metal. ",pw="13 cm",color=YELLOW_D),
