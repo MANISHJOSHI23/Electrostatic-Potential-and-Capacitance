@@ -1416,62 +1416,160 @@ class Conductor(Slide):
         steps2 = ItemList(Item(r"Under electrostatic condition, the conductors have following properties-",color=RED_D,pw="13 cm"),
                           Item(r"(1) Inside a conductor, electrostatic  field is zero.",pw="8 cm",color=YELLOW_D),
                           Item(r"Consider a charged/neutral conductor. There may also be an external field.",pw="8 cm",dot=False),
-                          Item(r"In static situation there is no current inside or at the surface, the free charges have so distribute themselves that electric field is zero everywhere inside",pw="8 cm",dot=False),
-                          Item(r"If there is a net electric field inside a conductor the free electrons will experience force and starts moving which results in the flow of current and violates the static condition.",dot=False,color=PINK,pw="13 cm"),
+                          Item(r"If there is a net electric field inside a conductor the free electrons will experience force and starts moving which results in the flow of current and violates the static condition.",dot=False,color=PINK,pw="9 cm"),
+                          Item(r"Therefore, In static situation there is no current inside or at the surface, the free charges have so distribute themselves that electric field is zero everywhere inside the conductor.",pw="9 cm",dot=False),
                           buff=0.5).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
+        cond_img = SVGMobject("conductor.svg",fill_color=GREY_D,stroke_color=TEAL,stroke_width=5)
+        cond_lbl = Tex("Conductor",font_size=35).next_to(cond_img,DOWN,buff=-0.35)
+        Ein = Tex(r"$E_{\text{in}}=0$",font_size=35,color=YELLOW).move_to(cond_img.get_center())
+        img1 = VGroup(cond_img,cond_lbl,Ein).next_to(steps2[1],RIGHT).align_to(steps2[1],UP).to_edge(RIGHT,buff=0.1)
+        cond_img = SVGMobject("conductor.svg",fill_color=GREY_D,stroke_color=TEAL,stroke_width=5)
+        cond_lbl = Tex("Conductor",font_size=35).next_to(cond_img,DOWN,buff=-0.35)
+        Ein = Tex(r"If $E_{\text{in}}\neq 0$",font_size=35,color=YELLOW).move_to(cond_img.get_center()+0.25*DOWN)
+        E = MyLabeledArrow(label=Tex(r"$\vec{E}_{in}$",font_size=30),pos=0.25*UP,start=cond_img.get_center()+0.5*UP+0.5*RIGHT,end=cond_img.get_center()+0.5*UP-0.5*RIGHT,tip_length=0.2,color=GREEN_D)
+        e = MyLabeledDot(label_in=Tex("$-$",font_size=30),point=cond_img.get_center()+0.25*UP+1.5*LEFT,color=PINK)
+        img2 = VGroup(cond_img,cond_lbl,Ein,e,E).next_to(img1,DOWN,buff=0.5).to_edge(RIGHT,buff=0.1)
         
-        steps3 = ItemList(Item(r"(2) At the surface of a charged conductor, electrostatic field must be normal to the surface at every point",color=YELLOW_D,pw="13 cm"),
+        steps3 = ItemList(Item(r"(2) At the surface of a charged conductor, electrostatic field must be normal to the surface at every point",color=YELLOW_D,pw="8 cm"),
                           Item(r"If E were not normal to the surface, it would have some non-zero component along the surface.", r" Free charges on the surface of the conductor would then experience force and move.",pw="8 cm",dot=False),
                           Item(r"In the static situation, therefore, E should have no tangential component.",pw="8 cm",dot=False),
                           Item(r"$E\cos\theta=0\quad $",r"Or $\cos\theta=0$",dot=False,pw="13 cm"),
                           Item(r"$\theta=90^\circ $",dot=False,pw="13 cm"),
                           buff=0.5).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
         
+        cond_img = SVGMobject("conductor.svg",fill_color=GREY_D,stroke_color=TEAL,stroke_width=5)
+        cond_lbl = Tex("Conductor",font_size=35).next_to(cond_img,DOWN,buff=-0.35)
+        E = MyLabeledArrow(label=Tex(r"$\vec{E}$",font_size=30),pos=0.25*LEFT,start=cond_img.get_top(),end=cond_img.get_top()+1*UP,tip_length=0.2,color=GREEN_D)
+        line = DashedLine(start=cond_img.get_top(),end=cond_img.get_top()+0.5*RIGHT)
+        rang = RightAngle(line,E,length=0.2)
+        img3 = VGroup(cond_img,cond_lbl,E,rang).next_to(steps2[0],RIGHT).align_to(steps2[0],UP).to_edge(RIGHT,buff=0.1)
+
+        cond_img = SVGMobject("conductor.svg",fill_color=GREY_D,stroke_color=TEAL,stroke_width=5)
+        cond_lbl = Tex("Conductor",font_size=35).next_to(cond_img,DOWN,buff=-0.35)
+        E = MyLabeledArrow(label=Tex(r"$\vec{E}$",font_size=30),pos=0.25*LEFT,start=cond_img.get_top()-0.5*LEFT,end=cond_img.get_top()-0.5*LEFT+0.8*UP+0.6*RIGHT,tip_length=0.2,color=GREEN_D)
+        line = DashedLine(start=cond_img.get_top(),end=cond_img.get_top()+0.5*RIGHT)
+        ang = Angle(line,E,radius=0.2)
+        e2 = MyLabeledDot(label_in=Tex("$-$",font_size=30),point=cond_img.get_top()-0.5*LEFT,color=PINK)
+        ang_lbl = Tex(r"$\theta$",font_size=35).next_to(ang,RIGHT,buff=0.05)
+        img4 = VGroup(cond_img,cond_lbl,E,ang,e2,ang_lbl).next_to(img3,DOWN,buff=0.5).to_edge(RIGHT,buff=0.1)
+        
+
         steps4 = ItemList(Item(r"(3)  The interior of a conductor can have no excess charge in the static situation, any excess charge must reside at the surface.",color=YELLOW_D,pw="13 cm"),
                           buff=0.5).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
         
+        cond_img = SVGMobject("conductor.svg",fill_color=GREY_D,stroke_color=TEAL,stroke_width=5)
+        cond_lbl = Tex("Conductor",font_size=35).next_to(cond_img,DOWN,buff=-0.35)
+        qin = Tex(r"$q_{\text{in}}=0$ or $\rho=0$",font_size=35,color=YELLOW).move_to(cond_img.get_center()+0.3*UP)
+        Ein = Tex(r"$E_{\text{in}}=0$",font_size=35,color=YELLOW).move_to(cond_img.get_center()+0.25*DOWN)
+        q = VGroup()
+        for pt in cond_img.get_all_points():
+            q.add(Tex(r"-",font_size=40,color=ORANGE).move_to(pt))
+            
+        img5 = VGroup(cond_img,cond_lbl,Ein,qin,q).next_to(steps4[0],DOWN).to_edge(RIGHT,buff=0.1)
+        
         steps5 = ItemList(Item(r"(4)  Electrostatic potential is constant throughout the volume of the conductor and has the same value (as inside) on its surface",color=YELLOW_D,pw="13 cm"),
+                          Item(r" At each point on the surface of a conductor electric potential is same Or the surface of conductor is an equipotential surface.",color=YELLOW_D,pw="13 cm"),
+                          Item(r"Using $dV = -E\ dr$",color=RED,pw="8 cm",dot=False),
+                          Item(r" $\displaystyle \int_{V_{\text{surf}}}^{V_{in}}dV = \int_{R}^{r}-E\ dr$",color=RED,pw="8 cm",dot=False),
+                          Item(r" $V_{\text{in}}-V_{\text{surf}} = 0\quad (\because E_{\text{in}}=0)$",color=RED,pw="8 cm",dot=False),
+                          Item(r"$V_{\text{in}} = V_{\text{surf}} = $ Constant",color=PINK,pw="8 cm",dot=False),
                           buff=0.5).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
         
+        cond_img = SVGMobject("conductor.svg",fill_color=GREY_D,stroke_color=TEAL,stroke_width=5)
+        cond_lbl = Tex("Conductor",font_size=35).next_to(cond_img,DOWN,buff=-0.35)
+        qin = Tex(r"$V_{\text{in}}=V_{\text{surf}} = $ Constant",font_size=35,color=YELLOW).move_to(cond_img.get_center()+0.3*UP)
+        Ein = Tex(r"$E_{\text{in}}=0$",font_size=35,color=YELLOW).move_to(cond_img.get_center()+0.25*DOWN)
+        E = MyLabeledArrow(label=Tex(r"$\vec{E}$",font_size=30),pos=0.25*LEFT,start=cond_img.get_top(),end=cond_img.get_top()+1*UP,tip_length=0.2,color=GREEN_D)
+        line = DashedLine(start=cond_img.get_top(),end=cond_img.get_top()+0.5*RIGHT)
+        rang = RightAngle(line,E,length=0.2)
+        q = VGroup()
+        for pt in cond_img.get_all_points():
+            q.add(Tex(r"-",font_size=40,color=ORANGE).move_to(pt))
+            
+        img6 = VGroup(cond_img,cond_lbl,Ein,qin,q,E,rang).next_to(steps5[1],DOWN).to_edge(RIGHT,buff=0.1)
+        
         steps6 = ItemList(Item(r"(5)  Electric field at the surface of a charged conductor: $\vec{E}=\dfrac{\sigma}{\epsilon_0}\hat{n}$",color=YELLOW_D,pw="13 cm"),
+                          Item(r"Using Gauss's law : $\oint E\ dS = \dfrac{q}{\epsilon_0}$",dot=False,pw="13 cm"),
+                          Item(r"$E\oint dS = \dfrac{\sigma A}{\epsilon_0}$",dot=False,pw="13 cm"),
+                          Item(r"$EA = \dfrac{\sigma A}{\epsilon_0}$",dot=False,pw="13 cm"),
+                          Item(r"$E = \dfrac{\sigma }{\epsilon_0}$",color=PINK,dot=False,pw="13 cm"),
                           buff=0.5).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
         
         steps7 = ItemList(Item(r"(6) Electrostatic shielding",color=YELLOW_D,pw="13 cm"),
+                          Item(r"Whatever be the charge and field configuration outside, any cavity (having no charges) in a conductor remains shielded from outside electric influence: the field inside the cavity is always zero. This is known as electrostatic shielding.",color=ORANGE,pw="8 cm"),
+                          Item(r" Shielding effect can be made use of in protecting sensitive instruments from outside electrical influence.",color=BLUE,pw="13 cm"),
                           buff=0.5).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
-        for item in steps2:
-            self.play(Write(item))
-            self.next_slide()
-
-        self.play(FadeOut(steps2))
         
-        for item in steps3:
-            for subitem in item:
-                self.play(Write(subitem))
-                self.next_slide()
+        cond_img = SVGMobject("cavity.svg",stroke_color=TEAL,stroke_width=5)
+        cond_lbl = Tex("Conductor",font_size=35).next_to(cond_img,DOWN,buff=-0.35)
+        qin = Tex(r"if $q=0$ ",font_size=32,color=YELLOW).move_to(cond_img.get_center()+0.35*UP)
+        Ein = Tex(r"$E_{\text{in}}=0$",font_size=32,color=YELLOW).move_to(cond_img.get_center())
+        cav = Tex(r"Cavity",font_size=32).move_to(cond_img.get_center()+0.35*DOWN)
+            
+        img7 = VGroup(cond_img,cond_lbl,Ein,qin,cav).next_to(steps7[0],DOWN).to_edge(RIGHT,buff=0.1)
 
-        self.play(FadeOut(steps3))
+        cond_img = SVGMobject("surface.svg").scale(1.5)
+        cond_lbl = Tex("Conductor",font_size=35).next_to(cond_img,DOWN,buff=-0.35)
+        E= Tex(r"$\vec{E}$",font_size=32,color=YELLOW).move_to(cond_img.get_center()).move_to(cond_img.get_top()+0.2*LEFT)
+        Ein = Tex(r"$E_{\text{in}}=0$",font_size=32,color=RED).move_to(cond_img.get_top()+2.6*DOWN)
+        ds = Tex(r"$d\vec{S}$",font_size=32,color=GREEN).move_to(cond_img.get_top()+0.55*RIGHT)
+        sigma = Tex(r"$\sigma$",font_size=32,color=PINK).move_to(cond_img.get_center()+0.1*UP)
+        img8 = VGroup(cond_img,Ein,E,ds,sigma).next_to(steps7[0],DOWN).to_edge(RIGHT,buff=0.1)
 
-        for item in steps4:
-            self.play(Write(item))
+
+        for i in range(0,len(steps2)):
+            self.play(Write(steps2[i]))
+            if i == 1:
+                self.play(Write(img1))
+            if i == 3:
+                self.play(Write(img2))
+                self.wait(5)
+                self.play(MoveAlongPath(e,Line(start=e.get_center(),end=e.get_center()+2.7*RIGHT),run_time=4))
             self.next_slide()
 
-        self.play(FadeOut(steps4))
+        self.play(FadeOut(steps2,img1,img2))
 
-        for item in steps5:
-            self.play(Write(item))
+        for i in range(0,len(steps3)):
+            self.play(Write(steps3[i]))
+            if i == 0:
+                self.play(Write(img3))
+            if i == 1:
+                self.play(Write(img4))
+                self.wait(5)
+                self.play(MoveAlongPath(e2,Line(start=e2.get_center(),end=e2.get_center()-1.7*RIGHT),run_time=4))
+            self.next_slide()
+        
+        self.play(FadeOut(steps3,img3,img4))
+
+        for i in range(0,len(steps4)):
+            self.play(Write(steps4[i]))
+            if i == 0:
+                self.play(Write(img5))
             self.next_slide()
 
-        self.play(FadeOut(steps5))
+        self.play(FadeOut(steps4,img5))
 
-        for item in steps6:
-            self.play(Write(item))
+        for i in range(0,len(steps5)):
+            self.play(Write(steps5[i]))
+            if i == 0:
+                self.play(Write(img6))
             self.next_slide()
 
-        self.play(FadeOut(steps6))
+        self.play(FadeOut(steps5,img6))
 
-        for item in steps7:
-            self.play(Write(item))
+        for i in range(0,len(steps6)):
+            self.play(Write(steps6[i]))
+            if i == 0:
+                self.play(Write(img8))
+                self.wait(2)
+            self.next_slide()
+
+        self.play(FadeOut(steps6,img8))
+
+        for i in range(0,len(steps7)):
+            self.play(Write(steps7[i]))
+            if i == 0:
+                self.play(Write(img7))
             self.next_slide()
 
         self.play(FadeOut(steps7))
-
