@@ -1605,7 +1605,7 @@ class Dielectric(Slide):
         steps2 = ItemList(Item(r"When a conductor is placed in an external field $(\vec{E}_0)$. ",r" The free charge carriers moves and charge distribution adjust itself itself in such a way that the electric field due to induced charge $\vec{E}_{\text{ind}}$ cancels the external field $(\vec{E}_0)$ which results in net zero electrostatic field inside.",pw="8 cm"),
                           Item(r"In dielectric charges are not free to move because they are tightly bounded to the atom. ",pw="8 cm",color=YELLOW_D),
                           Item(r"When dielectric is placed in an external field $(\vec{E}_0)$. ",r"This field induces dipole moment by stretching or reorienting molecules of the dielectric. ", r"Due to the induced dipoles charges builds on the surface which produces an electric field that opposes the external field but does not exactly cancel the external field. It only reduces it.",pw="13 cm",color=YELLOW_D),
-                          buff=0.5).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
+                          buff=0.45).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
         cond = RoundedRectangle(corner_radius=0.8,height=1.854,width=3,fill_opacity=0.3,fill_color=RED_E).next_to(title,DOWN).to_edge(RIGHT)
         cond2 = RoundedRectangle(corner_radius=0.8,height=1.854,width=3,fill_opacity=0.3,fill_color=RED_E).next_to(cond,DOWN).to_edge(RIGHT)
         anm1 = [Write(steps1[0][0]),Write(steps1[0][1]),Write(steps1[1]),FadeOut(steps1),Write(title),Succession(Write(steps2[0][0]),Write(cond)),Write(steps2[0][1]), Write(steps2[1]),Succession(Write(steps2[2][0]),Write(cond2)),Write(steps2[2][1]),Write(steps2[2][2])]
