@@ -1573,3 +1573,44 @@ class Conductor(Slide):
             self.next_slide()
 
         self.play(FadeOut(steps7))
+
+class Dielectric(Slide):
+    def construct(self):
+        title = Title('CHAPTER 2 : ELECTROSTATIC POTENTIAL AND CAPACITANCE',font_size=40,color=GREEN,match_underline_width_to_text=True)
+        Outline = Tex('Learning Objectives :',color=BLUE).next_to(title,DOWN,buff=0.1).to_corner(LEFT).scale(0.8)
+        list = BulletedList('INTRODUCTION','ELECTROSTATIC POTENTIAL',r'POTENTIAL DUE TO\\ A POINT CHARGE',r'POTENTIAL DUE TO\\ A SYSTEM OF CHARGES',r'POTENTIAL DUE TO AN\\ ELECTRIC DIPOLE',' EQUIPOTENTIAL SURFACES',
+                            r' RELATION BETWEEN FIELD\\ AND POTENTIAL').scale(0.7).next_to(Outline,DOWN,buff=0.2).to_corner(LEFT).shift(0.1*RIGHT)
+
+    
+        list2 = BulletedList(r'POTENTIAL ENERGY OF A SYSTEM\\ OF CHARGES',r'POTENTIAL ENERGY IN\\ AN EXTERNAL FIELD',r'POTENTIAL ENERGY OF A DIPOLE\\ IN AN EXTERNAL FIELD','ELECTROSTATICS OF CONDUCTORS','DIELECTRICS AND POLARISATION',
+                             'CAPACITORS AND CAPACITANCE','COMBINATION OF CAPACITORS',r"ENERGY STORED IN A CAPACITOR").scale(0.7).next_to(Outline,DOWN,buff=0.2).to_corner(RIGHT)
+        
+        self.add(title,Outline,list,list2)
+        self.next_slide(loop=True)
+        self.play(FocusOn(list2[4]))
+        self.play(Circumscribe(list2[4]))
+        self.next_slide()
+        self.play(RemoveTextLetterByLetter(list2))
+        self.play(RemoveTextLetterByLetter(list))
+        self.play(RemoveTextLetterByLetter(Outline))
+        Intro_title = Title('DIELECTRICS AND POLARISATION', font_size=40,color=BLUE,underline_buff=SMALL_BUFF,match_underline_width_to_text=True)
+        self.play(ReplacementTransform(title,Intro_title))
+        self.next_slide()
+
+        steps1 = ItemList(Item(r"Dielectrics are non-conducting substances. ",r"They have no (or negligible number of) charge carriers.",pw="13 cm"),
+                          Item(r"Examples: Glass, wax, water, air, wood, rubber, plastic, etc. ",pw="13 cm",color=YELLOW_D),
+                          buff=0.5).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
+        
+        title = Tex(r"Difference in the behaviour of a conductor and dielectric in the presence of an external field :",font_size=35,color=ORANGE).next_to(Intro_title,DOWN).to_edge(LEFT,buff=0.1)
+        steps2 = ItemList(Item(r"When a conductor is placed in an external field $(\vec{E}_0)$. ",r" The free charge carriers moves and charge distribution adjust itself itself in such a way that the electric field due to induced charge $\vec{E}_{\text{ind}}$ cancels the external field $(\vec{E}_0)$ which results in net zero electrostatic field inside.",pw="8 cm"),
+                          Item(r"In dielectric charges are not free to move because they are tightly bounded to the atom. ",pw="8 cm",color=YELLOW_D),
+                          Item(r"When dielectric is placed in an external field $(\vec{E}_0)$. ",r"This field induces dipole moment by stretching or reorienting molecules of the dielectric. ", r"Due to the induced dipoles charges builds on the surface which produces an electric field that opposes the external field but does not exactly cancel the external field. It only reduces it.",pw="13 cm",color=YELLOW_D),
+                          buff=0.5).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
+        cond = RoundedRectangle(corner_radius=0.8,height=1.854,width=3,fill_opacity=0.3,fill_color=RED_E).next_to(title,DOWN).to_edge(RIGHT)
+        cond2 = RoundedRectangle(corner_radius=0.8,height=1.854,width=3,fill_opacity=0.3,fill_color=RED_E).next_to(cond,DOWN).to_edge(RIGHT)
+        anm1 = [Write(steps1[0][0]),Write(steps1[0][1]),Write(steps1[1]),FadeOut(steps1),Write(title),Succession(Write(steps2[0][0]),Write(cond)),Write(steps2[0][1]), Write(steps2[1]),Succession(Write(steps2[2][0]),Write(cond2)),Write(steps2[2][1]),Write(steps2[2][2])]
+
+        for item in anm1:
+            self.play(item)
+            self.next_slide()
+        
