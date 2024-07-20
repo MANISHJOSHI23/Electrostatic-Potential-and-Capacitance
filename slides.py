@@ -1678,7 +1678,7 @@ class Dielectric(Slide):
                 p = Tex(r"$+$",font_size=20).move_to(c.get_right()+0.1*LEFT)
                 img2.add(VGroup(c,p,m))
 
-        anm3 = [Write(title),Write(img1.next_to(title,RIGHT).align_to(title,UP)),Succession(Write(steps4[0]),Write(img2.next_to(img1,RIGHT))),Write(steps4[1]),Write(steps4[2][0].set_color(GOLD)),Write(steps4[2][1]),FadeOut(steps4,title,img1,img2)]
+        anm3 = [Write(title),Write(img1.next_to(steps4[0],RIGHT).align_to(title,UP)),Succession(Write(steps4[0]),Write(img2.next_to(img1,RIGHT))),Write(steps4[1]),Write(steps4[2][0].set_color(GOLD)),Write(steps4[2][1]),FadeOut(steps4,title,img1,img2)]
         for item in anm3:
             self.play(item)
             self.next_slide()
@@ -1691,7 +1691,131 @@ class Dielectric(Slide):
         for item in anm3:
             self.play(item)
             self.next_slide()
-        img5 = ImageMobject("pole0.png").next_to(title,RIGHT).align_to(title,UP)
+        img5 = ImageMobject("pole0.png").next_to(steps5[0],RIGHT).align_to(title,UP)
+        img6 = ImageMobject("pole.png").next_to(img5,DOWN)
+
+        anm4 = [Write(title), Succession(Write(steps5[0]),FadeIn(img5)), Succession(Write(steps5[1]),FadeIn(img6)),Write(steps5[2])]
+        for item in anm4:
+            self.play(item)
+            self.next_slide()
+class Dielectric(Slide):
+    def construct(self):
+        title = Title('CHAPTER 2 : ELECTROSTATIC POTENTIAL AND CAPACITANCE',font_size=40,color=GREEN,match_underline_width_to_text=True)
+        Outline = Tex('Learning Objectives :',color=BLUE).next_to(title,DOWN,buff=0.1).to_corner(LEFT).scale(0.8)
+        list = BulletedList('INTRODUCTION','ELECTROSTATIC POTENTIAL',r'POTENTIAL DUE TO\\ A POINT CHARGE',r'POTENTIAL DUE TO\\ A SYSTEM OF CHARGES',r'POTENTIAL DUE TO AN\\ ELECTRIC DIPOLE',' EQUIPOTENTIAL SURFACES',
+                            r' RELATION BETWEEN FIELD\\ AND POTENTIAL').scale(0.7).next_to(Outline,DOWN,buff=0.2).to_corner(LEFT).shift(0.1*RIGHT)
+
+    
+        list2 = BulletedList(r'POTENTIAL ENERGY OF A SYSTEM\\ OF CHARGES',r'POTENTIAL ENERGY IN\\ AN EXTERNAL FIELD',r'POTENTIAL ENERGY OF A DIPOLE\\ IN AN EXTERNAL FIELD','ELECTROSTATICS OF CONDUCTORS','DIELECTRICS AND POLARISATION',
+                             'CAPACITORS AND CAPACITANCE','COMBINATION OF CAPACITORS',r"ENERGY STORED IN A CAPACITOR").scale(0.7).next_to(Outline,DOWN,buff=0.2).to_corner(RIGHT)
+        
+        self.add(title,Outline,list,list2)
+        self.next_slide(loop=True)
+        self.play(FocusOn(list2[4]))
+        self.play(Circumscribe(list2[4]))
+        self.next_slide()
+        self.play(RemoveTextLetterByLetter(list2))
+        self.play(RemoveTextLetterByLetter(list))
+        self.play(RemoveTextLetterByLetter(Outline))
+        Intro_title = Title('DIELECTRICS AND POLARISATION', font_size=40,color=BLUE,underline_buff=SMALL_BUFF,match_underline_width_to_text=True)
+        self.play(ReplacementTransform(title,Intro_title))
+        self.next_slide()
+
+        steps1 = ItemList(Item(r"Dielectrics are non-conducting substances. ",r"They have no (or negligible number of) charge carriers.",pw="13 cm"),
+                          Item(r"Examples: Glass, wax, water, air, wood, rubber, plastic, etc. ",pw="13 cm",color=YELLOW_D),
+                          buff=0.5).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
+        
+        title = Tex(r"Behaviour of a conductor and dielectric in the presence of an external field :",font_size=35,color=ORANGE).next_to(Intro_title,DOWN).to_edge(LEFT,buff=0.1)
+        steps2 = ItemList(Item(r"When a conductor is placed in an external field $(\vec{E}_0)$. ",r" The free charge carriers moves and charge distribution adjust itself itself in such a way that the electric field due to induced charge $\vec{E}_{\text{ind}}$ cancels the external field $(\vec{E}_0)$ which results in net zero electrostatic field inside.",pw="7.2 cm"),
+                          Item(r"In dielectric charges are not free to move because they are tightly bounded to the atom. ",pw="7.2 cm",color=YELLOW_D),
+                          Item(r"When dielectric is placed in an external field $(\vec{E}_0)$. ",r"This field induces dipole moment by stretching or reorienting molecules of the dielectric. ", r"Due to the induced dipoles charges builds on the surface which produces an electric field $(\vec{E}_{\text{ind}})$ that opposes the external field but does not exactly cancel the external field. It only reduces it.",pw="13 cm",color=GOLD),
+                          buff=0.55).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
+        cond = RoundedRectangle(corner_radius=0.8,height=1.854,width=3,fill_opacity=0.3,fill_color=RED_E)
+        cond_lbl = Tex("Conductor",font_size=35).next_to(cond,DOWN,buff=-0.35)
+        qin = Tex(r"$E_{\text{net}}=0$",font_size=35,color=YELLOW).move_to(cond.get_center()+0.35*DOWN)
+        Eo = MyLabeledArrow(label=Tex(r"$\vec{E}_{0}$",font_size=30),pos=0.25*UP,start=cond.get_top()+0.5*DOWN+0.5*LEFT,end=cond.get_top()+0.5*DOWN+0.5*RIGHT,tip_length=0.2,color=GREEN_D)
+        Eo1 = MyLabeledArrow(label=Tex(r"$\vec{E}_{0}$",font_size=30),pos=0.5*DOWN,start=cond.get_top()+0.5*DOWN+2.8*LEFT,end=cond.get_top()+0.5*DOWN+1.8*LEFT,tip_length=0.2,color=GREEN_D)
+        Eo2 = Arrow(start=cond.get_top()+1.6*DOWN+2.8*LEFT,end=cond.get_top()+1.6*DOWN+1.8*LEFT,tip_length=0.2,color=GREEN_D,buff=0)
+        Eo3 = MyLabeledArrow(label=Tex(r"$\vec{E}_{0}$",font_size=30),pos=0.5*DOWN,start=cond.get_top()+0.5*DOWN+1.8*RIGHT,end=cond.get_top()+0.5*DOWN+2.8*RIGHT,tip_length=0.2,color=GREEN_D)
+        Eo4 = Arrow(start=cond.get_top()+1.6*DOWN+1.8*RIGHT,end=cond.get_top()+1.6*DOWN+2.8*RIGHT,tip_length=0.2,color=GREEN_D,buff=0)
+        Ein = MyLabeledArrow(label=Tex(r"$\vec{E}_{\text{ind}}$",font_size=30),pos=0.25*UP,start=cond.get_top()+0.95*DOWN+0.5*RIGHT,end=cond.get_top()+0.95*DOWN+0.5*LEFT,tip_length=0.2,color=BLUE_D)
+        img1= VGroup(cond,Eo,Eo1,Eo2,Eo3,Eo4)
+        for i in [-0.87,-0.6,-0.3,0,0.3,0.6,0.87]:
+            img1.add(Tex(r"-",font_size=40).move_to(cond.get_left()+i*UP+(np.absolute(i/2)+0.1)*RIGHT))
+        
+        for i in [-0.87,-0.6,-0.3,0,0.3,0.6,0.87]:
+            img1.add(Tex(r"+",font_size=25).move_to(cond.get_right()+i*UP+(np.absolute(i/2)+0.1)*LEFT))
+        
+        img1.add(Ein,cond_lbl,qin).next_to(steps2[0],RIGHT).align_to(steps2[0],UP).to_edge(RIGHT)
+        Ein2 = MyLabeledArrow(label=Tex(r"$\vec{E}_{\text{ind}}$",font_size=30),pos=0.25*UP,start=cond.get_top()+0.95*DOWN+0.5*RIGHT,end=cond.get_top()+0.95*DOWN+0.2*LEFT,tip_length=0.2,color=BLUE_D)
+        
+        dielectric_lbl = Tex("Dielectric",font_size=35).next_to(cond,DOWN,buff=-0.35)
+        E_net = Tex(r"$E_{\text{net}}\neq 0$",font_size=35,color=YELLOW).move_to(cond.get_center()+0.35*DOWN)
+        img2 = VGroup(img1[0:-3].copy(),Ein2,dielectric_lbl,E_net).next_to(img1,DOWN,buff=0.5).to_edge(RIGHT)
+        anm1 = [Write(steps1[0][0]),Write(steps1[0][1]),Write(steps1[1]),FadeOut(steps1),Write(title),Succession(Write(steps2[0][0]),Write(img1)),Write(steps2[0][1]), Write(steps2[1]),Succession(Write(steps2[2][0]),Write(img2)),Write(steps2[2][1]),Write(steps2[2][2]),FadeOut(img1,img2,steps2,title)]
+
+        for item in anm1:
+            self.play(item)
+            self.next_slide()
+        
+        title = Tex(r"Polar and Non-Polar Dielectrics :",font_size=35,color=ORANGE).next_to(Intro_title,DOWN).to_edge(LEFT,buff=0.1)
+        steps3 = ItemList(Item(r"Non-Polar Dielectric :",r" In a non-polar molecule, the centres of positive and negative charges coincide. ", r"These molecules do not have any permanent dipole moment.",pw="8 cm"),
+                          Item(r"Examples: H$_2$, O$_2$, N$_2$, CO$_2$, CH$_4$ etc. ",pw="8 cm",color=YELLOW_D),
+                          Item(r"Polar Dielectric :",r" In a polar molecule, the centres of positive and negative charges are separated. ", r"These molecules have permanent dipole moment.",pw="8 cm"),
+                          Item(r"Examples: H$_2$O, NH$_3$, HCl etc. ",pw="8 cm",color=YELLOW_D),
+                          buff=0.55).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
+        img3 = ImageMobject("npolar.png").scale(0.8).next_to(steps3,RIGHT).shift(1.2*LEFT)
+        img4 = ImageMobject("polar.png").scale(0.8).next_to(img3,DOWN)
+        
+        anm2 = [Write(title),Write(steps3[0][0].set_color(GOLD)),Succession(Write(steps3[0][1]),FadeIn(img3)),Write(steps3[0][2]),Write(steps3[1]),Write(steps3[2][0].set_color(GOLD)),Write(steps3[2][1]),Write(steps3[2][2]),Succession(Write(steps3[3]),FadeIn(img4)),FadeOut(steps3,img3,img4,title)]
+
+        for item in anm2:
+            self.play(item)
+            self.next_slide()
+        
+        title = Tex(r"Non-Polar Dielectrics in external field :",font_size=35,color=ORANGE).next_to(Intro_title,DOWN).to_edge(LEFT,buff=0.1)
+        steps4 = ItemList(Item(r"In an external electric field, the positive and negative charges of a non- polar molecule are displaced in opposite directions ",pw="6 cm"),
+                          Item(r"The non-polar molecule thus develops an induced dipole moment. The dielectric is said to be polarised by the external field.",pw="6 cm",color=YELLOW_D),
+                          Item(r"Linear  isotropic dielectrics :",r" Dielectrics for which the induced dipole moment is in the direction of the field and is proportional to the field strength",pw="13 cm"),
+                          buff=0.55).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
+        
+        d_img = Rectangle(height=3,width=2.4,fill_opacity=0.3).set_color_by_gradient(BLUE,BLUE_E)
+        Ein = Tex(r"$\vec{E}_{\text{net}}=0$ \\ $\vec{p}_{\text{net}}=0$",font_size=35,color=YELLOW).next_to(d_img,DOWN)
+        d_lbl = Tex("In absence of external field",font_size=35).next_to(d_img,DOWN,buff=-0.35).next_to(Ein,DOWN)
+        img1 = VGroup(d_img,Ein)
+        for i in [1.2, 0.6, 0, -0.6, -1.2]:
+            for j in [0.4, 1.2, 2]:
+                c = Circle(0.2,color=RED).move_to(d_img.get_left()+i*UP+j*RIGHT)
+                pm = Tex(r"$\pm$",font_size=22).move_to(c.get_center())
+                img1.add(VGroup(c,pm))
+        
+        d_img = Rectangle(height=3,width=2.4,fill_opacity=0.3).set_color_by_gradient(BLUE,BLUE_E)
+        E_net = Tex(r"$\vec{E}_{\text{net}}\neq0$ \\ $\vec{p}_{\text{net}}\neq0$",font_size=35,color=YELLOW).next_to(d_img,DOWN)
+        d_lbl = Tex("In the presence of external field",font_size=35).next_to(d_img,DOWN,buff=-0.35).next_to(Ein,DOWN)
+        Eo = MyLabeledArrow(label=Tex(r"$\vec{E}_{0}$",font_size=30),pos=0.25*UP,start=d_img.get_top()+0.25*UP+0.5*LEFT,end=d_img.get_top()+0.25*UP+0.5*RIGHT,tip_length=0.2,color=GREEN_D)
+        Ein = MyLabeledArrow(label=Tex(r"$\vec{E}_{\text{ind}}$",font_size=30),pos=0.55*RIGHT,start=d_img.get_top()+1.2*DOWN+0.5*RIGHT,end=d_img.get_top()+1.2*DOWN+0.15*LEFT,tip_length=0.2,color=PINK)
+        img2 = VGroup(d_img,Ein,Eo,E_net)
+        for i in [1.2, 0.6, 0, -0.6, -1.2]:
+            for j in [0.4, 1.2, 2]:
+                c = Ellipse(width=0.6,height=0.25,color=RED).move_to(d_img.get_left()+i*UP+j*RIGHT)
+                m = Tex(r"$-$",font_size=20).move_to(c.get_left()+0.1*RIGHT)
+                p = Tex(r"$+$",font_size=20).move_to(c.get_right()+0.1*LEFT)
+                img2.add(VGroup(c,p,m))
+
+        anm3 = [Write(title),Write(img1.next_to(steps4[0],RIGHT).align_to(title,UP)),Succession(Write(steps4[0]),Write(img2.next_to(img1,RIGHT))),Write(steps4[1]),Write(steps4[2][0].set_color(GOLD)),Write(steps4[2][1]),FadeOut(steps4,title,img1,img2)]
+        for item in anm3:
+            self.play(item)
+            self.next_slide()
+        
+        title = Tex(r"Polar Dielectrics in external field :",font_size=35,color=ORANGE).next_to(Intro_title,DOWN).to_edge(LEFT,buff=0.1)
+        steps5 = ItemList(Item(r"In a dielectric with polar molecules, in the absence of external field, the different permanent dipoles are oriented randomly due to thermal agitation (energy). ",r"So, the total dipole moment is zero.",pw="8 cm"),
+                          Item(r"But, When external field $\vec{E}_0$ is applied, each dipole molecule tend to align with the field which result in a net dipole moment in the direction of electric field.",pw="8 cm",color=YELLOW_D),
+                          Item(r"The thermal energy tends to disturb the alignment and the external field tends to align the dipole. ",pw="8 cm"),
+                          buff=0.55).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
+        for item in anm3:
+            self.play(item)
+            self.next_slide()
+        img5 = ImageMobject("pole0.png").next_to(steps5[0],RIGHT).align_to(title,UP)
         img6 = ImageMobject("pole.png").next_to(img5,DOWN)
 
         anm4 = [Write(title), Succession(Write(steps5[0]),FadeIn(img5)), Succession(Write(steps5[1]),FadeIn(img6)),Write(steps5[2])]
