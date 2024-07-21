@@ -1822,3 +1822,73 @@ class Dielectric(Slide):
         for item in anm4:
             self.play(item)
             self.next_slide()
+
+
+class Capacitor(Slide):
+    def construct(self):
+        title = Title('CHAPTER 2 : ELECTROSTATIC POTENTIAL AND CAPACITANCE',font_size=40,color=GREEN,match_underline_width_to_text=True)
+        Outline = Tex('Learning Objectives :',color=BLUE).next_to(title,DOWN,buff=0.1).to_corner(LEFT).scale(0.8)
+        list = BulletedList('INTRODUCTION','ELECTROSTATIC POTENTIAL',r'POTENTIAL DUE TO\\ A POINT CHARGE',r'POTENTIAL DUE TO\\ A SYSTEM OF CHARGES',r'POTENTIAL DUE TO AN\\ ELECTRIC DIPOLE',' EQUIPOTENTIAL SURFACES',
+                            r' RELATION BETWEEN FIELD\\ AND POTENTIAL').scale(0.7).next_to(Outline,DOWN,buff=0.2).to_corner(LEFT).shift(0.1*RIGHT)
+
+    
+        list2 = BulletedList(r'POTENTIAL ENERGY OF A SYSTEM\\ OF CHARGES',r'POTENTIAL ENERGY IN\\ AN EXTERNAL FIELD',r'POTENTIAL ENERGY OF A DIPOLE\\ IN AN EXTERNAL FIELD','ELECTROSTATICS OF CONDUCTORS','DIELECTRICS AND POLARISATION',
+                             'CAPACITORS AND CAPACITANCE','COMBINATION OF CAPACITORS',r"ENERGY STORED IN A CAPACITOR").scale(0.7).next_to(Outline,DOWN,buff=0.2).to_corner(RIGHT)
+        
+        self.add(title,Outline,list,list2)
+        self.next_slide(loop=True)
+        self.play(FocusOn(list2[5]))
+        self.play(Circumscribe(list2[5]))
+        self.next_slide()
+        self.play(RemoveTextLetterByLetter(list2))
+        self.play(RemoveTextLetterByLetter(list))
+        self.play(RemoveTextLetterByLetter(Outline))
+        Intro_title = Title('CAPACITORS AND CAPACITANCE', font_size=40,color=BLUE,underline_buff=SMALL_BUFF,match_underline_width_to_text=True)
+        self.play(ReplacementTransform(title,Intro_title))
+        self.next_slide()
+        img1 = ImageMobject("capb.jpg").scale(1.4).next_to(Intro_title,DOWN)
+        title = Tex(r"Capacitor :",font_size=35,color=ORANGE).next_to(Intro_title,DOWN).to_edge(LEFT,buff=0.1)
+        steps1 = ItemList(Item(r"A capacitor is a device used to store electrical charge and electrical energy.",pw="13 cm",color=YELLOW_D),
+                          Item(r"A capacitor is consists of at least two electrical conductors separated by a distance. The space between capacitors may simply be a vacuum or an insulating material (dielectric) ",pw="7.5 cm",color=RED),
+                          Item(r"When battery terminals are connected to an uncharged capacitor, the battery potential moves a small amount of charge $Q$ from positive plate to the negative plate.",pw="7.5 cm",color=YELLOW_D),
+                          Item(r" The net charge on the capacitor is zero, but one plate gets $+Q$ charge and other gets $-Q$ charge.",pw="7.5 cm"),
+                          buff=0.55).next_to(title,DOWN).to_edge(LEFT,buff=0.3)
+        
+        steps2 = ItemList(Item(r"The electric field in the region between the conductors is proportional to the charge $Q$.  ",pw="13 cm",color=RED),
+                          Item(r"Also, the potential difference $(V)$ between the plates is directly proportional to the charge ($Q)$ of the capacitor.",pw="7.5 cm",color=YELLOW_D),
+                          Item(r"$Q\propto V$",pw="7.5 cm",dot=False,color=PINK),
+                          Item(r"$Q = CV $", r" OR $ C=\dfrac{Q}{V}$",pw="7.5 cm",dot=False,color=PINK),
+                          Item(r"The constant $C$ is called capacitance of the capacitor.",pw="13 cm",color=GOLD_A),
+                          Item(r"The capacitance C  is independent of Q or V and, depends only on the geometrical configuration (shape, size, separation) of the conductors and nature of the insulator (dielectric) between the two conductors.",pw="13 cm",color=GOLD_A),
+                          buff=0.45).next_to(Intro_title,DOWN).to_edge(LEFT,buff=0.3)
+        
+        steps3 = ItemList(Item(r"S.I. unit of capacitance : farad (F)\quad \quad", r"$1F = \dfrac{1\ C}{1\ V}$",pw="13 cm",color=RED),
+                          Item(r"In practice, a farad is a very big unit; the most common units are ",pw="13 cm",color=PINK),
+                          Item(r"$1\ \mu F = 10^{-6}\ F,\quad $", r" $1\ nF = 10^{-9}\ F,\quad $", r"$1\ pF = 10^{-12}\ F\ etc.$",pw="13 cm",dot=False,color=PINK),
+                          Item(r"Symbols of Capacitor",pw="13 cm",color=GOLD_A),
+                          Item(r"Dielectric strength : ",r" The maximum electric field that a dielectric medium can withstand without breakdown (of its insulating property) is called dielectric strength.",r" There is a limit to the amount  of charge that can be stored on a given capacitor without significant leaking.",pw="13 cm",color=GOLD_A),
+                          buff=0.75).next_to(Intro_title,DOWN).to_edge(LEFT,buff=0.3)
+        
+        img2 = ImageMobject("cap1.png").next_to(steps1[1],RIGHT).align_to(steps1[1],UP)
+        img3 = ImageMobject("cap2.png").next_to(steps1[1],RIGHT).align_to(steps1[1],UP)
+        img4 = ImageMobject("cap3.png").next_to(steps1[1],RIGHT).to_edge(RIGHT).align_to(steps2[4],DOWN)
+        
+        anm1 = [FadeIn(img1),Succession(FadeOut(img1),Write(title),Write(steps1[0]),Succession(Write(steps1[1])),FadeIn(img2)),Succession(Write(steps1[2]),FadeIn(img3)),Write(steps1[3]),Succession(FadeOut(steps1,img2,img3,title),FadeIn(img4))]
+
+        for item in anm1:
+            self.play(item)
+            self.next_slide()
+        
+        for item in steps2:
+            self.play(Write(item))
+            self.next_slide()
+        
+        self.play(FadeOut(steps2,img4))
+        img5 = ImageMobject("symbol.png").scale(0.8).next_to(steps3[3],RIGHT)
+
+        anm2 = [Write(steps3[0]),Write(steps3[1]),Write(steps3[2][0]),Write(steps3[2][1]),Write(steps3[2][2]),Succession(Write(steps3[3]),FadeIn(img5)),Write(steps3[4][0].set_color(BLUE)),Write(steps3[4][1]),Write(steps3[4][2].set_color(GREEN))]
+
+        for item in anm2:
+            self.play(item)
+            self.next_slide()
+
