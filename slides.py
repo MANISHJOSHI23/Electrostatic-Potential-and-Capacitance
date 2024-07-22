@@ -1,6 +1,7 @@
 from manim import *  # or: from manimlib import *
 
 from manim_slides import Slide
+import random
 
 def Item(*str,dot = True,font_size = 35,math=False,pw="8cm",color=WHITE):
     if math:
