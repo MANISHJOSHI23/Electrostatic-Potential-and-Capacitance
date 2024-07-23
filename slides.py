@@ -1861,7 +1861,7 @@ class PPCapacitor(ThreeDScene,Slide):
         self.play(FadeOut(steps1))
         self.add(img)
         self.wait(2)
-        anm = (Write(steps1[0]),Write(steps1[1]),Write(steps1[2]),Write(steps1[3][0]),Write(steps1[3][1]),Write(steps1[4],Write(steps1[5])),Write(steps1[6][0]),Write(steps1[6][1]),Write(steps1[6][2]))
+        anm = (Write(steps1[0]),Write(steps1[1]),Write(steps1[2]),Write(steps1[3][0]),Write(steps1[3][1]),Write(steps1[4]),Write(steps1[5]),Write(steps1[6][0]),Write(steps1[6][1]),Write(steps1[6][2]))
 
         for item in anm:
             self.play(item)
