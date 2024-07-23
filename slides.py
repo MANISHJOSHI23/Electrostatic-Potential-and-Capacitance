@@ -1830,19 +1830,21 @@ class PPCapacitor(ThreeDScene,Slide):
         
         density = Tex("$+\sigma$",font_size=35).move_to(plane.get_center()+1.4*OUT)
         density2 = Tex("$-\sigma$",font_size=35).move_to(plane.get_center()+1.4*OUT)
+        A = Tex("$A$",font_size=35).move_to(plane.get_center()+1.4*OUT+0.5*DOWN)
         pc = VGroup()
         nc = VGroup()
+        E = VGroup()
         for i in range(-4,4):
             for j in range(-4,5):
                 pc.add(Tex("$+$",font_size=35,color=BLACK).move_to(i*0.33*UP+j*0.33*IN).rotate(PI/2,UP))
                 nc.add(Tex("$-$",font_size=35,color=BLACK).move_to(i*0.33*UP+j*0.33*IN).rotate(PI/2,OUT))
                 if i%2 == 0 and j%2==0:
-                    pc.add(Arrow3D(start=i*0.33*UP+j*0.33*IN,end=i*0.33*UP+j*0.33*IN+2*RIGHT,color=RED))
+                    E.add(Arrow3D(start=i*0.33*UP+j*0.33*IN,end=i*0.33*UP+j*0.33*IN+2*RIGHT,color=RED))
         
-        plane2 = VGroup(plane.copy(),nc,density2).shift(2*RIGHT)
+        plane2 = VGroup(plane.copy(),nc,density2,A).shift(2*RIGHT)
         d = Line3D(start=4*0.33*UP-4*0.33*IN,end=4*0.33*UP-4*0.33*IN+2*RIGHT,color=BLUE).shift(DOWN)
         d_lbl = Tex(r"$d$",font_size=35).next_to(d,DOWN)
-        img = VGroup(plane,plane2,density,density2, pc,d,d_lbl).next_to(Intro_title,DOWN).shift(1.5*RIGHT+0.2*DOWN)
+        img = VGroup(plane,plane2,density,density2, pc,d,d_lbl,E).next_to(Intro_title,DOWN).shift(1.5*RIGHT+0.2*DOWN)
 
         steps1 = ItemList(Item(r"A parallel plate capacitor consist of two large plane parallel conducting plates each of Area (A) and separated by a small distance (d)",pw="13 cm",color=YELLOW_D),
                           Item(r"The two plates have charges $Q$ and $-Q$. We first take the medium between the plates to be vacuum.",pw="7.8 cm",color=RED),
@@ -1850,12 +1852,13 @@ class PPCapacitor(ThreeDScene,Slide):
                           Item(r"So, Potential difference between the plates: ", r"$V = Ed$",pw="13 cm"),
                           Item(r"$V=\dfrac{Qd}{A\epsilon_0}$",pw="13 cm",color=YELLOW_D),
                           Item(r"The capacitance $C$ of the parallel plate capacitor is: ",pw="13 cm"),
-                          Item(r"$C=\dfrac{Q}{V}=\dfrac{Q\epsilon_0 A}{Qd}=\dfrac{\epsilon_0 A}{d}$",pw="13 cm",color=YELLOW_D),
+                          Item(r"$C=\dfrac{Q}{V}=$ ",r" $\dfrac{Q\epsilon_0 A}{Qd}=$ ",r" $\dfrac{\epsilon_0 A}{d}$",pw="13 cm",color=YELLOW_D),
                           buff=0.35).next_to(Intro_title,DOWN).to_edge(LEFT,buff=0.3)
 
         self.set_camera_orientation(phi=80*DEGREES,theta=-60*DEGREES,frame_center=[-2.5,1.5,-1])
         self.add_fixed_in_frame_mobjects(Intro_title,steps1)
-        self.add_fixed_orientation_mobjects(density,density2,d_lbl)
-        self.add(img)
+        self.add_fixed_orientation_mobjects(density,density2,d_lbl,A)
+        self.play(FadeOut(steps1))
+        self.add(img[0:-1])
         self.wait(2)
-
+        anm = (Write(steps1[0]),Write(steps1[1]),Succession(Write(steps1[2]),Write(E)),Write(steps1[3][0]),Write(steps1[3][1]),Write(steps1[4]),Write(steps1[5][0]),Write(steps1[5][1]),Write(steps1[5][2]))
