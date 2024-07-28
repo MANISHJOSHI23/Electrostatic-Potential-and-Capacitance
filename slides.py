@@ -1866,3 +1866,76 @@ class PPCapacitor(ThreeDScene,Slide):
         for item in anm:
             self.play(item)
             self.next_slide()
+
+
+class Ex19(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 19 :", r" A parallel plate capacitor with air between the plates has a capacitance of 8 pF (1 pF = $10^{-12}$ F). What will be the capacitance if the distance between the plates is reduced by half, and the space between them is filled with a substance of dielectric constant 6. [NCERT]",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+
+
+class Ex20(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 20 :", r" In a parallel plate capacitor with air between the plates, each plate has an area of $6 \times 10^{-3}\ m^2$ and the distance between the plates is 3 mm. Calculate the capacitance of the capacitor. If this capacitor is connected to a 100 V supply, what is the charge on each plate of the capacitor? [NCERT]",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+
+
+class Ex21(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 21 :", r" Explain what would happen if in the capacitor given in Exercise 2.8, a 3 mm thick mica sheet (of dielectric constant = 6) were inserted between the plates,\\ (a) while the voltage supply remained connected. \\ (b) after the supply was disconnected. [NCERT]",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+
+class Ex22(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 22 :", r" Three capacitors each of capacitance 9 pF are connected in series.\\ (a)  What is the total capacitance of the combination?\\ (b) What is the potential difference across each capacitor if the combination is connected to a 120 V supply? [NCERT]",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+
+
+class Ex23(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 23 :", r" Three capacitors of capacitances 2 pF, 3 pF and 4 pF are connected in parallel.\\ (a) What is the total capacitance of the combination? \\ (b) Determine the charge on each capacitor if the combination is connected to a 100 V supply. [NCERT]",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+
+
+class Ex24(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 24 :", r"  A network of four 10 $\mu$F capacitors is connected to a 500 V supply, as shown in Fig. 2.29. Determine\\ (a) the equivalent capacitance of the network and\\ (b) the charge on each capacitor. (Note, the charge on a capacitor is the charge on the plate with higher potential, equal and opposite to the charge on the plate with lower potential.) [NCERT]",tex_environment="{minipage}{8 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        img = ImageMobject("Ex24.png").next_to(ex_title,RIGHT)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title),FadeIn(img))
+
+
+class Ex25(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 25 :", r" A 12 pF capacitor is connected to a 50V battery. How much electrostatic energy is stored in the capacitor?. [NCERT]",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+
+
+class Ex26(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 26 :", r"   (a) A 900 pF capacitor is charged by 100 V battery [Fig. 2.31(a)]. How much electrostatic energy is stored by the capacitor? \\\\ (b) The capacitor is disconnected from the battery and connected to another 900 pF capacitor [Fig. 2.31(b)]. What is the electrostatic energy stored by the system? [NCERT]",tex_environment="{minipage}{10.5 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        img1 = ImageMobject("Ex26a.png").scale(0.95).next_to(ex_title,RIGHT).align_to(ex_title,UP)
+        img2 = ImageMobject("Ex26b.png").scale(0.95).next_to(img1,DOWN)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title),FadeIn(img1,img2))
+
+class Ex27(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 27 :", r" A 600 pF capacitor is charged by a 200 V supply. It is then disconnected from the supply and is connected to another uncharged 600 pF capacitor. How much electrostatic energy is lost in the process? [NCERT]",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
